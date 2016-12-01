@@ -1,0 +1,321 @@
+\section{Image segmentation} \label{sec:seg} \index{Image segmentation} 
+\subsection{Cosa è l'image segmentation?}
+La segmentazione è uno dei passi più importanti nell'analisi delle immagini processate
+
+Il suo scopo è quello di \textbf{dividere} l'immagine in parti che hanno una forte correlazione con oggetti o aree che si trovano nel mondo reale.
+
+\subsection{Quanti tipi di segmentazione abbiamo?}
+Abbiamo due tipi di segmentazione:
+
+\begin{enumerate}
+\item \textbf{Segmentazione Completa} in cui le regioni corrispondono direttamente con gli oggetti dell'immagine in ingresso. In pratica ogni elemento dell'immagine viene riconosciuto e isolato. Per ottenere questo risultato è necessario avere informazioni di processing di alto livello (high level processing) da utilizzare per comprendere il dominio del problema da risolvere (che ci permette di riconoscere gli oggetti/regioni)
+
+\item \textbf{Segmentazione Parziale} in cui le regioni/segmenti di immagini non corrispondono direttamente con gli oggetti reali rappresentati nell'immagine. In questo caso l'immagine è divisa in regioni omogenee secondo una determinata proprietà scelta (colore, texture, riflettività).
+
+La segmentazione parziale è seguita da un ulteriori processi sino ad arrivare all'immagine finale di segmentazione che può essere trovata grazie all'aiuto di informazioni di alto livello.
+\end{enumerate}
+
+\subsection{In quali campi viene utilizzata la segmentazione?}
+Ecco alcune delle problematiche più comuni che possono essere risolte con la segmentazione:
+\begin{itemize}
+\item ottenere dati da immagini ambigue
+\item rumore nelle informazioni
+\item ottenere oggetti con discreto contrasto su di uno sfondo uniforme
+\item semplici lavori di raggruppamento come cellule del sangue, caratteri stampati
+\end{itemize}
+
+In generale è difficile ottenere una corretta e completa segmentazione; per questo spesso di utilizza una segmentazione parziale come input in un processo di alto livello.
+
+\subsection{Quali sono i metodi utilizzati per la segmentazione?}
+\begin{itemize}
+\item Thresholding (Approccio Globale) che si basa sull'istogramma di alcune caratteristiche dell'immagine come il \textbf{gray level
+thresholding} o \textbf{soglia del livello di grigio}. Si ricercano i toni soglia che separano oggetti differenti nell’immagine. E’ il metodo più semplice e veloce.
+\item Segmentazione basata sugli Edge in cui ci cercano i contorni degli oggetti basandosi sulla discontinuità dei toni, cioè sugli edge
+\item Segmentazione basata sulle Regioni in cui si ricercano le regioni, cioè degli oggetti uniformi secondo un certo criterio (stesso tono di grigio, o tono di grigio che si differenzia al massimo di una certa soglia)
+\end{itemize}
+
+\subsection{Cosa si intende con Approccio Globale: Gray level thresholding?}
+E' il sistema più semplice a livello concettuale di segmentazione e per questo è anche il sistema più efficiente computazionalmente e veloce.
+
+Esso viene applicato alle immagini che contengono regioni o oggetti con un costante livello di riflettività o assorbimento di luce. Si sfrutta questa caratteristica per partizionare l'immagine grazie ai valori di intensità e/o alle proprietà di questi valori.
+
+\subsection{Quale è l'idea alla base del gray level thresholding con due elementi (mode) da separare?}
+
+\begin{enumerate}
+\item Si supponga di avere un istogramma di intensità di una immagine \textit{f(x,y)} che è composta da un oggetto bianco (level 255) e di uno sfondo scuro (level 0) e che si voglia estrarre l'oggetto dallo sfondo.
+
+\item Inizialmente si seleziona una soglia \textit{T} con cui si ottiene l'immagine segmentata \textit{g(x, y)}:
+
+$$
+g(x, y) =
+\bigg \{
+\begin{array}{rl}
+1 & se \quad f(x, y) > T \\
+0 & se \quad f(x, y) \leq T \\
+\end{array}
+$$
+
+\item Se il valore di intensità dell'immagine è superiore a quello della soglia, si assegna a \textit{g(x, y) il valore 1, altrimenti 0}
+\end{enumerate}
+
+\subsection{Quale è l'idea alla base del gray level thresholding con tre elementi (mode) da separare?}
+
+\begin{itemize}
+\item Maggiore è il numero di elementi (mode), più complessa sarà la segmentazione. Esaminiamo il caso di una immagine con due oggetti chiari posti su uno sfondo scuro.
+
+\item L'immagine segmentata risultante \textit{g(x, y)} sarà:
+
+$$
+g(x, y) =
+\bigg \{
+\begin{array}{rl}
+a & se \quad f(x, y) > T_2 \\
+b & se \quad  T_1 < f(x, y) \leq T_2 \\
+c & se \quad f(x, y) \leq T_1 \\
+\end{array}
+$$
+
+dove \textit{a, b, c} sono tre diversi valori di intensità e $T_1$ e $T_2$ sono due differenti valori di soglia.
+
+\end{itemize}
+
+
+\subsection{Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}
+Possiamo avere due tipi di soglia:
+
+\begin{enumerate}
+\item Soglia Globale
+\item Soglia Variabile, che si divide in soglia locale o regionale
+\end{enumerate}
+
+\subsection{Il thresholding applicato ad immagini con rumore e variazioni di luminosità: cosa cambia?}
+Esaminando l'istogramma dell'immagine si nota che questo subisce delle variazioni a seconda che 
+l'immagine si affetta da rumore o una intensità variabile.
+
+\subsection{Cosa è il single global threshold e quando si applica?}
+Il single global threshold si applica a quelle immagini in cui l'intensità degli oggetti e dello sfondo rende questi facilmente distinti. L'algoritmo che si applica all'intera immagine si basa sui seguenti passi:
+
+\begin{enumerate}
+\item Si seleziona una soglia \textit{T}
+\item Si effettua la segmentazione dell'immagine usando la soglia \textit{T} producendo due gruppi di pixel:
+
+\begin{itemize}
+\item $G_1$ dato da tutti i pixel che hanno una intensità $\geq T$
+\item $G_2$ dato da tutti i pixel che hanno una intensità $ < T$
+\end{itemize}
+
+\item Si calcolano i valori di \textbf{intensità medi} $m_1$ e $m_2$ rispettivamente per i gruppi di pixel $G_1$ e $G_2$
+\item Si determina un nuovo livello di soglia \textit{T} secondo la formula:
+
+$$
+T = {1 \over 2} (m_1 + m_2)
+$$
+
+\item Si ripetono i passi dal 2 al 4 sino a quando la differenza tra i valori di \textit{T} (delle successive iterazioni) è più piccolo rispetto al valore predefinito $T_0$
+\end{enumerate}
+
+\subsection{Quali sono le caratteristiche del single global threshold?}
+\begin{itemize}
+\item E' un algoritmo semplice.
+\item Funziona bene nei casi in cui l'istogramma dell'immagine presenta delle campane (le mode) corrispondenti agli oggetti e allo sfondo separate da una valle.
+\item Il valore di soglia iniziale deve essere maggiore rispetto al minimo valore di intensità e minore rispetto al massimo valore di intensità nell'immagine.
+\end{itemize}
+
+\subsection{Qual è l'algoritmo Matlab per il global thresholding?}
+Indicando con:
+
+\begin{itemize}
+\item \textit{f} per l'immagine di input
+\item \textit{g} per l'immagine di output
+\item \textit{T} per la soglia
+\end{itemize}
+
+\begin{lstlisting}
+function [g]=iter_thresh(f)
+T = 0.5 * (double(min(f(:)))+ double(max(f(:))));
+flag = false;
+while ~flag
+	g = f >= T;
+	Tnext = 0.5 * (mean(f(g)) + mean(f(~g)));
+	flag = abs (T - Tnext) < 0.5;
+	T = Tnext;
+end
+\end{lstlisting}
+
+\section{Cosa è l'Optimum global thresholding o metodo Otsu?} \index{Otsu}
+Meglio conosciuto come \href{https://en.wikipedia.org/wiki/Otsu\%27s_method}{Metodo Otsu} è un è un metodo di sogliatura automatica dell'istogramma nelle immagini digitali.
+
+Viene definito come "ottimo" perché \textbf{massimizza la varianza tra le classi}. Un algoritmo di sogliatura (threshold) che fornisce la migliore separazione tra le classi in termini dei loro valori di intensità è il miglior threshold.
+
+\subsection{Come funziona il metodo Otsu?} \index{Otsu}
+
+\begin{itemize}
+\item Si considerino: 
+
+\begin{itemize}
+\item \{0, 1, 2, ... , L-1\} siano gli \textit{L} distinti livelli di intensità in una immagine
+\item MxN sia la dimensione dell'immagine di \textit{M} righe X \textit{N} colonne
+\item $n_i$ indica il numero di pixel con intensità \textit{i}
+\item $MN = n_0 + n_1 + n_2 + \dot{}, + n_{L-1}$
+\end{itemize}
+
+\item l'istogramma normalizzato ha componenti $p_i = {n_i \over MN}$ da cui segue:
+$$\sum_{i=0}^{L-1} p_i = 1 \quad p_i \geq 0$$
+
+\item Selezionando e utilizzando una soglia $T(k) = k$ con $0 < k < L-1$ con l-immagine di input, si ottengono le due classi $c_1$ e $C_2$ dove:
+
+\begin{itemize}
+\item $C_1$ è la classe di tutti i pixel con valori di intensità compresi nel range $[0, k]$
+\item $C_2$ è la classe di tutti i pixel con valori di intensità compresi nel range $[k+1, L-1]$
+\end{itemize}
+
+\item Usando questa soglia, si può calcolare la \textit{probabilità} $P_1(k)$ che un pixel appartenga alla classe $C_1$:
+
+$$
+P_1(k) = \sum_{i=0}^{k} p_i
+$$
+
+\item La \textit{probabilità} che il pixel invece appartenga alla classe $C_2$ è data da:
+
+$$
+P_2(k) = \sum_{i=k+1}^{L-1} p_i = 1 - P_1(k)
+$$
+
+\item Il valore di \textit{intensità medio} di tutti i pixel della classe $C_1$ è:
+
+$$
+m_1(k) = \sum_{i=0}^{k} i P({i \over C_1}) = \sum_{i=0}^{k} i P({C_1 \over i}) {P(i) \over P(C_1)} = {1 \over P_1(k)} \sum_{i=0}^{k} i p_i
+$$
+\item Il valore di \textit{intensità medio} di tutti i pixel della classe $C_2$ è invece:
+
+$$
+m_2(k) = \sum_{i=k+1}^{L-1} i P({i \over C_2}) = {1 \over P_2(k)} \sum_{i=k+1}^{L-1} i p_i
+$$
+
+
+\item La \textit{media complessiva} sino al livello \textit{k} è data da:
+
+$$
+m(k) = \sum_{i=0}^{k} i p_i
+$$
+
+\item Invece l'\textit{intensità media} dell'intera immagine (\textbf{la media globale}) è data da:
+
+$$
+m_G = \sum_{i=0}^{L-1} i p_i
+$$ 
+
+\item Inoltre valgono le seguenti:
+
+$$
+P_1m_1 + P_2m_2 = m_G
+$$
+
+$$
+P_1 + P_2 = 1
+$$
+
+\item Per valutare la bontà della soglia al livello \textit{k} si usa la \textit{metrica normalizzata}: 
+
+$$
+\eta = {\sigma_{B}^{2} \over \sigma_{G}^{2}}
+$$
+
+\begin{itemize}
+\item dove $\sigma_{G}^{2}$ è la \textbf{varianza globale} ed è \textit{costante}:
+
+$$
+\sigma_{G}^{2} = \sum_{i=0}^{L-1} (i - m_G)^2 p_i
+$$
+
+\item dove $\sigma_{B}^{2}$ è la \textbf{varianza tra le classi} che indica la misura della \textit{separabilità} tra le classi:
+
+$$
+\sigma_{B}^{2} = P_1(m_1 - m_G)^2 + P_2(m_2 - m_G)^2 = P_1 P_2(m_1 - m_2)^2 = {(m_G P_1 - m)^2 \over P_1 (1 - P_1)}
+$$
+\end{itemize}
+
+\item (The farther the two means m 1 and m 2 are from each other the larger will be.)
+
+\item Poiché $\sigma_{G}^{2}$ è una costante ne consegue che $\eta$ è una \textit{misura della separabilità}. Inoltre massimizzare questa metrica, è identico a massimizza $\sigma_{B}^{2}$
+
+\item l'obiettivo principale è determinare il valore \textit{k} di soglia che massimizza la varianza di classe.
+
+\item Introducendo nuovamente \textit{k} si ha:
+
+$$
+\eta(k) = {\sigma_{B}^{2} \over \sigma_{G}^{2}}
+$$
+
+e
+
+$$
+{\sigma_{B}^{2}(k)} = {[{m_g P_1(k} - m(k)]^2 \over {P_1(k}[1 - P_1(k)]}
+$$
+
+\item La \textbf{soglia ottimale} è il valore $k^*$ che massimizza $\sigma_{B}^{2}(k)$:
+
+$$
+\sigma_{B}^{2}(k^*) = \max_{0 \leq k \leq L-1} \sigma_{B}^{2}(k)
+$$
+
+\item Per trovare $K^*$ si deve valutare questa equazione per tutti i valori interi di \textit{k} e scegliere il valore che produce il massimo  $\sigma_{B}^{2}(k)$
+
+\item Se il massimo esiste \textit{per più di un valore di k} è consuetudine mediare i diversi valori di \textit{k} per cui $\sigma_{B}^{2}(k)$ è massima.
+
+\item La metrica normalizzata$\eta$ valutata per il valore di soglia ottimale $\eta(k^*)$ può essere utilizzata per ottenere una stima quantitativa della separabilità delle classi, che a sua volta fornisce un'idea della facilità di
+sogliatura di una data immagine. Il suo valore oscilla tra $0$ e $1$:
+
+\begin{itemize}
+\item il valore più basso è ottenibile solo da immagini con un singolo livello di intensità costante
+\item Il limite superiore invece è ottenibile solo dalle immagini 2-valori con intensità uguali a $0$ e $L-1$
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Spiegare le sogliature multiple}
+Il metodo di Otsu può essere esteso ad un numero arbitrario di soglie in modo da valutare un diverso numero di classi.
+
+Generalmente i metodi che utilizzano più di due soglie vengono risolte con più valori di intensità (colore).
+
+Un altro metodo è quello di suddividere l'immagine in \textit{rettangoli sovrapposti}
+
+\begin{itemize}
+\item questo sistema viene utilizzato per compensare i casi di illuminazione non uniforme
+\item i rettangoli vengono scelti di piccole dimensioni in modo che l'illuminazione da essi coperta, sia uniforme
+\end{itemize}
+
+\subsection{Illustra il metodo Otsu in Matlab} \index{Otsu}
+La funzione \textit{graythresh} di Matlab permette di calcolare una soglia utilizzando il metodo di Otsu.
+
+\subsection{Tecniche per migliorare il global thresholding}
+\begin{itemize}
+\item Applicare lo smoothing all'immagine prima del thresholding: è una tecnica che si applica quando il rumore non può essere ridotto e come metodo di sogliatura si seleziona il global thresholding. Di seguito un esempio di codice Matlab.
+
+\begin{lstlisting}
+f=imread('large_septagon_gaussian_noise_mean_0_std_50_added.tif');
+figure, imshow(f);
+figure, imhist(f);
+T=graythresh(f);
+T=T*255
+g=f>=T;
+figure, imshow(g);
+filt=fspecial('average', [5 5]);
+ff=imfilter(f, filt);
+figure, imshow(ff);
+figure, imhist(ff);
+ylim([0 16000])
+T1=graythresh(ff);
+T1=T1*255
+g1=ff>=T1;
+figure, imshow(g1);
+\end{lstlisting}
+
+\item Thresholding variabile attraverso il partizionamento dell'immagine. Di seguito un esempio di codice Matlab.
+
+\begin{lstlisting}
+
+
+\end{lstlisting}
+
+\end{itemize}

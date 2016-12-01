@@ -1,0 +1,2 @@
+makeglossaries eai
+
