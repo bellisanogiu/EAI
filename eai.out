@@ -1,18 +1,23 @@
-\BOOKMARK [1][-]{section.1}{Image segmentation}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{Cosa \350 l'image segmentation?}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{Quanti tipi di segmentazione abbiamo?}{section.1}% 3
-\BOOKMARK [2][-]{subsection.1.3}{In quali campi viene utilizzata la segmentazione?}{section.1}% 4
-\BOOKMARK [2][-]{subsection.1.4}{Quali sono i metodi utilizzati per la segmentazione?}{section.1}% 5
-\BOOKMARK [2][-]{subsection.1.5}{Cosa si intende con Approccio Globale: Gray level thresholding?}{section.1}% 6
-\BOOKMARK [2][-]{subsection.1.6}{Quale \350 l'idea alla base del gray level thresholding con due elementi \(mode\) da separare?}{section.1}% 7
-\BOOKMARK [2][-]{subsection.1.7}{Quale \350 l'idea alla base del gray level thresholding con tre elementi \(mode\) da separare?}{section.1}% 8
-\BOOKMARK [2][-]{subsection.1.8}{Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}{section.1}% 9
-\BOOKMARK [2][-]{subsection.1.9}{Il thresholding applicato ad immagini con rumore e variazioni di luminosit\340: cosa cambia?}{section.1}% 10
-\BOOKMARK [2][-]{subsection.1.10}{Cosa \350 il single global threshold e quando si applica?}{section.1}% 11
-\BOOKMARK [2][-]{subsection.1.11}{Quali sono le caratteristiche del single global threshold?}{section.1}% 12
-\BOOKMARK [2][-]{subsection.1.12}{Qual \350 l'algoritmo Matlab per il global thresholding?}{section.1}% 13
-\BOOKMARK [1][-]{section.2}{Cosa \350 l'Optimum global thresholding o metodo Otsu?}{}% 14
-\BOOKMARK [2][-]{subsection.2.1}{Come funziona il metodo Otsu?}{section.2}% 15
-\BOOKMARK [2][-]{subsection.2.2}{Spiegare le sogliature multiple}{section.2}% 16
-\BOOKMARK [2][-]{subsection.2.3}{Illustra il metodo Otsu in Matlab}{section.2}% 17
-\BOOKMARK [2][-]{subsection.2.4}{Tecniche per migliorare il global thresholding}{section.2}% 18
+\BOOKMARK [0][-]{chapter.1}{Image segmentation}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Cosa \350 l'image segmentation?}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Quanti tipi di segmentazione abbiamo?}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{In quali campi viene utilizzata la segmentazione?}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Quali sono i metodi utilizzati per la segmentazione?}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.5}{Cosa si intende con Approccio Globale: Gray level thresholding?}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.6}{Quale \350 l'idea alla base del gray level thresholding con due elementi \(mode\) da separare?}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.7}{Quale \350 l'idea alla base del gray level thresholding con tre elementi \(mode\) da separare?}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.8}{Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.9}{Il thresholding applicato ad immagini con rumore e variazioni di luminosit\340: cosa cambia?}{chapter.1}% 10
+\BOOKMARK [1][-]{section.1.10}{Cosa \350 il single global threshold e quando si applica?}{chapter.1}% 11
+\BOOKMARK [1][-]{section.1.11}{Quali sono le caratteristiche del single global threshold?}{chapter.1}% 12
+\BOOKMARK [1][-]{section.1.12}{Qual \350 l'algoritmo Matlab per il global thresholding?}{chapter.1}% 13
+\BOOKMARK [1][-]{section.1.13}{Cosa \350 l'Optimum global thresholding o metodo Otsu?}{chapter.1}% 14
+\BOOKMARK [1][-]{section.1.14}{Come funziona il metodo Otsu?}{chapter.1}% 15
+\BOOKMARK [1][-]{section.1.15}{Spiegare le sogliature multiple}{chapter.1}% 16
+\BOOKMARK [1][-]{section.1.16}{Illustra il metodo Otsu in Matlab}{chapter.1}% 17
+\BOOKMARK [1][-]{section.1.17}{Tecniche per migliorare il global thresholding}{chapter.1}% 18
+\BOOKMARK [0][-]{chapter.2}{Image processing con Matlab}{}% 19
+\BOOKMARK [1][-]{section.2.1}{Ridimensionamento}{chapter.2}% 20
+\BOOKMARK [1][-]{section.2.2}{Trasformazioni geometriche}{chapter.2}% 21
+\BOOKMARK [1][-]{section.2.3}{Rumore}{chapter.2}% 22
+\BOOKMARK [1][-]{section.2.4}{Smoothing con thresholding}{chapter.2}% 23

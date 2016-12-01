@@ -1,10 +1,11 @@
-\section{Image segmentation} \label{sec:seg} \index{Image segmentation} 
-\subsection{Cosa è l'image segmentation?}
+\chapter{Image segmentation} \label{cha:seg} \index{Image segmentation} 
+
+\section{Cosa è l'image segmentation?}
 La segmentazione è uno dei passi più importanti nell'analisi delle immagini processate
 
 Il suo scopo è quello di \textbf{dividere} l'immagine in parti che hanno una forte correlazione con oggetti o aree che si trovano nel mondo reale.
 
-\subsection{Quanti tipi di segmentazione abbiamo?}
+\section{Quanti tipi di segmentazione abbiamo?}
 Abbiamo due tipi di segmentazione:
 
 \begin{enumerate}
@@ -15,7 +16,7 @@ Abbiamo due tipi di segmentazione:
 La segmentazione parziale è seguita da un ulteriori processi sino ad arrivare all'immagine finale di segmentazione che può essere trovata grazie all'aiuto di informazioni di alto livello.
 \end{enumerate}
 
-\subsection{In quali campi viene utilizzata la segmentazione?}
+\section{In quali campi viene utilizzata la segmentazione?}
 Ecco alcune delle problematiche più comuni che possono essere risolte con la segmentazione:
 \begin{itemize}
 \item ottenere dati da immagini ambigue
@@ -26,20 +27,26 @@ Ecco alcune delle problematiche più comuni che possono essere risolte con la se
 
 In generale è difficile ottenere una corretta e completa segmentazione; per questo spesso di utilizza una segmentazione parziale come input in un processo di alto livello.
 
-\subsection{Quali sono i metodi utilizzati per la segmentazione?}
+\section{Quali sono i metodi utilizzati per la segmentazione?}
 \begin{itemize}
 \item Thresholding (Approccio Globale) che si basa sull'istogramma di alcune caratteristiche dell'immagine come il \textbf{gray level
-thresholding} o \textbf{soglia del livello di grigio}. Si ricercano i toni soglia che separano oggetti differenti nell’immagine. E’ il metodo più semplice e veloce.
+thresholding} o \textbf{soglia del livello di grigio}. Si ricercano i toni soglia che separano oggetti differenti nell'immagine. E’ il metodo più semplice e veloce
+
 \item Segmentazione basata sugli Edge in cui ci cercano i contorni degli oggetti basandosi sulla discontinuità dei toni, cioè sugli edge
+
 \item Segmentazione basata sulle Regioni in cui si ricercano le regioni, cioè degli oggetti uniformi secondo un certo criterio (stesso tono di grigio, o tono di grigio che si differenzia al massimo di una certa soglia)
+\begin{itemize}
+	\item region growing
+	\item region splitting and merging
+\end{itemize}
 \end{itemize}
 
-\subsection{Cosa si intende con Approccio Globale: Gray level thresholding?}
+\section{Cosa si intende con Approccio Globale: Gray level thresholding?}
 E' il sistema più semplice a livello concettuale di segmentazione e per questo è anche il sistema più efficiente computazionalmente e veloce.
 
 Esso viene applicato alle immagini che contengono regioni o oggetti con un costante livello di riflettività o assorbimento di luce. Si sfrutta questa caratteristica per partizionare l'immagine grazie ai valori di intensità e/o alle proprietà di questi valori.
 
-\subsection{Quale è l'idea alla base del gray level thresholding con due elementi (mode) da separare?}
+\section{Quale è l'idea alla base del gray level thresholding con due elementi (mode) da separare?}
 
 \begin{enumerate}
 \item Si supponga di avere un istogramma di intensità di una immagine \textit{f(x,y)} che è composta da un oggetto bianco (level 255) e di uno sfondo scuro (level 0) e che si voglia estrarre l'oggetto dallo sfondo.
@@ -58,7 +65,7 @@ $$
 \item Se il valore di intensità dell'immagine è superiore a quello della soglia, si assegna a \textit{g(x, y) il valore 1, altrimenti 0}
 \end{enumerate}
 
-\subsection{Quale è l'idea alla base del gray level thresholding con tre elementi (mode) da separare?}
+\section{Quale è l'idea alla base del gray level thresholding con tre elementi (mode) da separare?}
 
 \begin{itemize}
 \item Maggiore è il numero di elementi (mode), più complessa sarà la segmentazione. Esaminiamo il caso di una immagine con due oggetti chiari posti su uno sfondo scuro.
@@ -80,7 +87,7 @@ dove \textit{a, b, c} sono tre diversi valori di intensità e $T_1$ e $T_2$ sono
 \end{itemize}
 
 
-\subsection{Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}
+\section{Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}
 Possiamo avere due tipi di soglia:
 
 \begin{enumerate}
@@ -88,11 +95,11 @@ Possiamo avere due tipi di soglia:
 \item Soglia Variabile, che si divide in soglia locale o regionale
 \end{enumerate}
 
-\subsection{Il thresholding applicato ad immagini con rumore e variazioni di luminosità: cosa cambia?}
+\section{Il thresholding applicato ad immagini con rumore e variazioni di luminosità: cosa cambia?}
 Esaminando l'istogramma dell'immagine si nota che questo subisce delle variazioni a seconda che 
 l'immagine si affetta da rumore o una intensità variabile.
 
-\subsection{Cosa è il single global threshold e quando si applica?}
+\section{Cosa è il single global threshold e quando si applica?}
 Il single global threshold si applica a quelle immagini in cui l'intensità degli oggetti e dello sfondo rende questi facilmente distinti. L'algoritmo che si applica all'intera immagine si basa sui seguenti passi:
 
 \begin{enumerate}
@@ -114,14 +121,14 @@ $$
 \item Si ripetono i passi dal 2 al 4 sino a quando la differenza tra i valori di \textit{T} (delle successive iterazioni) è più piccolo rispetto al valore predefinito $T_0$
 \end{enumerate}
 
-\subsection{Quali sono le caratteristiche del single global threshold?}
+\section{Quali sono le caratteristiche del single global threshold?}
 \begin{itemize}
 \item E' un algoritmo semplice.
 \item Funziona bene nei casi in cui l'istogramma dell'immagine presenta delle campane (le mode) corrispondenti agli oggetti e allo sfondo separate da una valle.
 \item Il valore di soglia iniziale deve essere maggiore rispetto al minimo valore di intensità e minore rispetto al massimo valore di intensità nell'immagine.
 \end{itemize}
 
-\subsection{Qual è l'algoritmo Matlab per il global thresholding?}
+\section{Qual è l'algoritmo Matlab per il global thresholding?}
 Indicando con:
 
 \begin{itemize}
@@ -147,7 +154,7 @@ Meglio conosciuto come \href{https://en.wikipedia.org/wiki/Otsu\%27s_method}{Met
 
 Viene definito come "ottimo" perché \textbf{massimizza la varianza tra le classi}. Un algoritmo di sogliatura (threshold) che fornisce la migliore separazione tra le classi in termini dei loro valori di intensità è il miglior threshold.
 
-\subsection{Come funziona il metodo Otsu?} \index{Otsu}
+\section{Come funziona il metodo Otsu?} \index{Otsu}
 
 \begin{itemize}
 \item Si considerino: 
@@ -273,7 +280,7 @@ sogliatura di una data immagine. Il suo valore oscilla tra $0$ e $1$:
 
 \end{itemize}
 
-\subsection{Spiegare le sogliature multiple}
+\section{Spiegare le sogliature multiple}
 Il metodo di Otsu può essere esteso ad un numero arbitrario di soglie in modo da valutare un diverso numero di classi.
 
 Generalmente i metodi che utilizzano più di due soglie vengono risolte con più valori di intensità (colore).
@@ -285,10 +292,10 @@ Un altro metodo è quello di suddividere l'immagine in \textit{rettangoli sovrap
 \item i rettangoli vengono scelti di piccole dimensioni in modo che l'illuminazione da essi coperta, sia uniforme
 \end{itemize}
 
-\subsection{Illustra il metodo Otsu in Matlab} \index{Otsu}
+\section{Illustra il metodo Otsu in Matlab} \index{Otsu}
 La funzione \textit{graythresh} di Matlab permette di calcolare una soglia utilizzando il metodo di Otsu.
 
-\subsection{Tecniche per migliorare il global thresholding}
+\section{Tecniche per migliorare il global thresholding}
 \begin{itemize}
 \item Applicare lo smoothing all'immagine prima del thresholding: è una tecnica che si applica quando il rumore non può essere ridotto e come metodo di sogliatura si seleziona il global thresholding. Di seguito un esempio di codice Matlab.
 

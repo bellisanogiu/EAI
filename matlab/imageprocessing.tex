@@ -1,0 +1,64 @@
+\chapter{Image processing con Matlab}
+
+\section{Ridimensionamento}
+
+\textbf{comando:} imresize
+
+\textbf{possibili domande:}
+\begin{itemize}
+	\item Leggere un'immagine e rimpicciolirla o farne lo zoom di un valore intero
+	\item Leggere un'immagine e rimpicciolirla o farne lo zoom di un valore decimale con interpolazione lineare
+\end{itemize}
+
+\section{Trasformazioni geometriche}
+In Matlab è possibile effettuare una \gls{trasformazione geometrica affine}
+specificando la matrice di trasformazione \textit{T} attraverso il comando \textit{maketform}.
+Per effettuare la trasformazione si usa il comando \textit{imtransform}.
+
+\textbf{comando:} maketform, imtransform, imrotate, impixelinfo (pixval),
+
+\textbf{possibili domande:}
+\begin{itemize}
+	\item Effettuare la rotazione di un’immagine qualsiasi
+	\item Confrontare il risultato con quello ottenuto mediante la funzione \textit{imrotate}
+	\item Leggere l'immagine di 'lena' e realizzare l'ingrandimento di una zona dell’immagine usando la matrice di trasformazione \textit{T}
+	la sezione da ingrandire è intorno all'occhio di lena.
+	Per individuare la sezione e, quindi, avere informazioni sulla posizione dei pixel potete usare il comando \textit{impixelinfo} o \textit{pixval} (in base alla versione di Matlab più o meno recente).
+	\item Fare degli esperimenti modificando il tipo di interpolazione e notate l'effetto di blocchettatura causa
+	
+	\item La combinazione di diverse trasformazioni affini è ancora una trasformazione 	affine, che può essere ottenuta tramite il prodotto (matriciale) delle matrici che le definiscono.
+	
+	\item Scrivere una funzione dal prototipo \verb|function g=rot_dist(f, alfa, c)| per realizzare prima una rotazione e poi una distorsione verticale.
+	
+	\item Creare l'immagine di ingresso usando il seguente comando
+	\verb|f = checkerboard(40);| in modo da generare una scacchiera su cui le modifiche risultano essere più facilmente visibili.
+\end{itemize}
+
+\section{Rumore}
+\begin{itemize}
+	\item Aggiungere del rumore gaussiano bianco ad un immagine f con il comando	\verb|noisy = f + n con n = d*randn(size(f))| dove \textbf{d è la deviazione standard del rumore}.
+	
+	\item Rimuovere il rumore dall'immagine con i filtri a media mobile (al variare della dimensione della finestra).
+	
+	\item Valutare l'efficacia del filtraggio sia visivamente sia calcolando l'errore quadratico medio tra f e l'immagine "ripulita" .
+	
+	\item L’errore quadratico medio rappresenta una misura quantitativa per stabilire quanto l'immagine elaborata sia simile all'originale.
+	
+	\item L'MSE (Mean Squared Error) tra due immagini si definisce come:
+	$$
+	MSE = {1 \over MN} \sum_{m=0}^{M-1} \sum_{n=0}^{N-1} |f(m, n) - g(m, n)|^2
+	$$
+\end{itemize}
+
+\section{Smoothing con thresholding}
+
+\begin{itemize}
+	\item Consideriamo l'immagine 'telescopio.jpg', proveniente dal telescopio Hubble, in orbita intorno alla terra. Rilevare gli oggetti grandi realizzando le seguenti operazioni:
+	\begin{itemize}
+		\item Visualizzare l'immagine
+		\item Applicare il filtro che effettua la media aritmetica su una finestra di dimensioni 15x15 e visualizzare il risultato
+		\item Applicare un'operazione a soglia per eliminare gli oggetti piccoli (considerare una soglia pari al 25 per cento del valore massimo presente nell'immagine filtrata)
+		\item Visualizzare il risultato dell'elaborazione
+		
+	\end{itemize}
+\end{itemize}

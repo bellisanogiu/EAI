@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[a4paper,10pt,oneside]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
@@ -10,15 +10,36 @@
 \usepackage{hyperref}				% Gestione riferimenti incrociati
 
 \title{Elaborazione e Analisi delle Immagini}
-\author{Pinco Pallino}
+\author{Giuseppe Bellisano}
 \date{30 novembre 2016}
 
 \makeindex
 
 \usepackage[nonumberlist]{glossaries} % glossario
-\newglossaryentry{prova}{name=prova,
-	description={parole a caso}}
-\makeglossaries
+%\glossarystyle{altlisthypergroup}
+	\makeglossaries
+	
+\newglossaryentry{trasformazione geometrica affine}
+{
+	name=trasformazione geometrica affine, description={Esempi di affinità sono rotazioni, omotetie, traslazioni, rototraslazioni, riflessioni. Le affinità non sono necessariamente isometrie, non preservano cioè angoli e distanze, mentre mantengono sempre il parallelismo tra le rette.}
+}
+% --------------------------------------------------------------------
+\newglossaryentry{omega}{%
+	name=$\omega_\mathrm{n}$,
+	description={pulsazione naturale},
+}
+% --------------------------------------------------------------------
+\newglossaryentry{omega1}{%
+	name=$\omega_\mathrm{n}$,
+	description={pulsazione naturale},
+}
+% --------------------------------------------------------------------
+\newglossaryentry{omega2}{%
+	name=$\omega_\mathrm{n}$,
+	description={pulsazione naturale},
+}
+
+
 
 \usepackage{listings}
 \usepackage{color}
@@ -60,7 +81,8 @@
 
 \input{capitoli/segmentazione}
 
-[\ldots] \gls{prova}
+\input{matlab/imageprocessing}
+
 \printindex				% stampa indice analitico
 
 \printglossaries		% stampa glossario
