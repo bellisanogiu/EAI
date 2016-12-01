@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{hyperref}
-
+\usepackage{mathtools}				% Matematica
 \usepackage{microtype}				% Microgiustificazione
 \usepackage{makeidx}				% indice analitico
 \usepackage{hyperref}				% Gestione riferimenti incrociati
@@ -25,12 +25,12 @@
 }
 % --------------------------------------------------------------------
 \newglossaryentry{omega}{%
-	name=$\omega_\mathrm{n}$,
-	description={pulsazione naturale},
+	name=insieme connesso2,
+	description={pulsazione naturale2},
 }
 % --------------------------------------------------------------------
-\newglossaryentry{omega1}{%
-	name=$\omega_\mathrm{n}$,
+\newglossaryentry{connesso}{%
+	name=connesso,
 	description={pulsazione naturale},
 }
 % --------------------------------------------------------------------
@@ -80,7 +80,7 @@
 \tableofcontents 					%indice generale
 
 \input{capitoli/segmentazione}
-
+\input{capitoli/segmentazione2}
 \input{matlab/imageprocessing}
 
 \printindex				% stampa indice analitico

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.11.29)  1 DEC 2016 21:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2016.11.29)  1 DEC 2016 23:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -518,21 +518,112 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip43
 )
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2015/11/12 v1.18 mathematical typesetting tools
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count103
+\calc@Bcount=\count104
+\calc@Adimen=\dimen108
+\calc@Bdimen=\dimen109
+\calc@Askip=\skip44
+\calc@Bskip=\skip45
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count105
+\calc@Cskip=\skip46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2016/06/28 v2.15d AMS math features
+\@mathmargin=\skip47
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen110
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen111
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count106
+LaTeX Info: Redefining \frac on input line 199.
+\uproot@=\count107
+\leftroot@=\count108
+LaTeX Info: Redefining \overline on input line 297.
+\classnum@=\count109
+\DOTSCASE@=\count110
+LaTeX Info: Redefining \ldots on input line 394.
+LaTeX Info: Redefining \dots on input line 397.
+LaTeX Info: Redefining \cdots on input line 518.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen112
+LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
+\macc@depth=\count111
+\c@MaxMatrixCols=\count112
+\dotsspace@=\muskip11
+\c@parentequation=\count113
+\dspbrk@lvl=\count114
+\tag@help=\toks18
+\row@=\count115
+\column@=\count116
+\maxfields@=\count117
+\andhelp@=\toks19
+\eqnshift@=\dimen113
+\alignsep@=\dimen114
+\tagshift@=\dimen115
+\tagwidth@=\dimen116
+\totwidth@=\dimen117
+\lineht@=\dimen118
+\@envbody=\toks20
+\multlinegap=\skip48
+\multlinetaggap=\skip49
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2739.
+LaTeX Info: Redefining \] on input line 2740.
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
+\g_MT_multlinerow_int=\count118
+\l_MT_multwidth_dim=\dimen119
+\origjot=\skip50
+\l_MT_shortvdotswithinadjustabove_dim=\dimen120
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen121
+\l_MT_above_intertext_sep=\dimen122
+\l_MT_below_intertext_sep=\dimen123
+\l_MT_above_shortintertext_sep=\dimen124
+\l_MT_below_shortintertext_sep=\dimen125
+)
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2016/05/14 v2.6a Micro-typographical refinements (RS)
-\MT@toks=\toks17
-\MT@count=\count103
+\MT@toks=\toks22
+\MT@count=\count119
 LaTeX Info: Redefining \textls on input line 774.
-\MT@outer@kern=\dimen108
+\MT@outer@kern=\dimen126
 LaTeX Info: Redefining \textmicrotypecontext on input line 1310.
-\MT@listname@count=\count104
+\MT@listname@count=\count120
 
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def
 File: microtype-pdftex.def 2016/05/14 v2.6a Definitions specific to pdftex (RS)
 
 LaTeX Info: Redefining \lsstyle on input line 916.
 LaTeX Info: Redefining \lslig on input line 916.
-\MT@outer@space=\skip44
+\MT@outer@space=\skip51
 )
 Package microtype Info: Loading configuration file microtype.cfg.
 
@@ -558,16 +649,16 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks18
-\XKV@tempa@toks=\toks19
+\XKV@toks=\toks23
+\XKV@tempa@toks=\toks24
 )
-\XKV@depth=\count105
+\XKV@depth=\count121
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty
 Package: mfirstuc 2016/07/31 v2.04 (NLCT)
-\@glsmfirst=\toks20
-\@glsmrest=\toks21
+\@glsmfirst=\toks25
+\@glsmrest=\toks26
 )
 (/usr/share/texlive/texmf-dist/tex/latex/textcase/textcase.sty
 Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
@@ -578,67 +669,9 @@ Package: xfor 2009/02/05 v1.05 (NLCT)
 (/usr/share/texlive/texmf-dist/tex/latex/datatool/datatool-base.sty
 Package: datatool-base 2016/07/28 v2.27 (NLCT)
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2016/06/28 v2.15d AMS math features
-\@mathmargin=\skip45
-
-For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
-Package: amstext 2000/06/29 v2.01 AMS text
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
-File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks22
-\ex@=\dimen109
-))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
-Package: amsbsy 1999/11/29 v1.2d Bold Symbols
-\pmbraise@=\dimen110
-)
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
-Package: amsopn 2016/03/08 v2.02 operator names
-)
-\inf@bad=\count106
-LaTeX Info: Redefining \frac on input line 199.
-\uproot@=\count107
-\leftroot@=\count108
-LaTeX Info: Redefining \overline on input line 297.
-\classnum@=\count109
-\DOTSCASE@=\count110
-LaTeX Info: Redefining \ldots on input line 394.
-LaTeX Info: Redefining \dots on input line 397.
-LaTeX Info: Redefining \cdots on input line 518.
-\Mathstrutbox@=\box26
-\strutbox@=\box27
-\big@size=\dimen111
-LaTeX Font Info:    Redeclaring font encoding OML on input line 634.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 635.
-\macc@depth=\count111
-\c@MaxMatrixCols=\count112
-\dotsspace@=\muskip11
-\c@parentequation=\count113
-\dspbrk@lvl=\count114
-\tag@help=\toks23
-\row@=\count115
-\column@=\count116
-\maxfields@=\count117
-\andhelp@=\toks24
-\eqnshift@=\dimen112
-\alignsep@=\dimen113
-\tagshift@=\dimen114
-\tagwidth@=\dimen115
-\totwidth@=\dimen116
-\lineht@=\dimen117
-\@envbody=\toks25
-\multlinegap=\skip46
-\multlinetaggap=\skip47
-\mathdisplay@stack=\toks26
-LaTeX Info: Redefining \[ on input line 2739.
-LaTeX Info: Redefining \] on input line 2740.
-)
 (/usr/share/texlive/texmf-dist/tex/latex/substr/substr.sty
 Package: substr 2009/10/20 v1.2 Handle substrings
-\c@su@anzahl=\count118
+\c@su@anzahl=\count122
 )
 (/usr/share/texlive/texmf-dist/tex/latex/datatool/datatool-fp.sty
 Package: datatool-fp 2016/07/28 v2.27 (NLCT)
@@ -649,19 +682,19 @@ Package: fp 1995/04/02
 `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
 (/usr/share/texlive/texmf-dist/tex/latex/fp/defpattern.sty
 Package: defpattern 1994/10/12
-\actioncount=\count119
+\actioncount=\count123
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-basic.sty
 Package: fp-basic 1996/05/13
-\FP@xs=\count120
-\FP@xia=\count121
-\FP@xib=\count122
-\FP@xfa=\count123
-\FP@xfb=\count124
-\FP@rega=\count125
-\FP@regb=\count126
-\FP@regs=\count127
-\FP@times=\count128
+\FP@xs=\count124
+\FP@xia=\count125
+\FP@xib=\count126
+\FP@xfa=\count127
+\FP@xfb=\count128
+\FP@rega=\count129
+\FP@regb=\count130
+\FP@regs=\count131
+\FP@times=\count132
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-addons.sty
 Package: fp-addons 1995/03/15
@@ -680,7 +713,7 @@ Package: fp-pas 1994/08/29
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-random.sty
 Package: fp-random 1995/02/23
-\FPseed=\count129
+\FPseed=\count133
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eqn.sty
 Package: fp-eqn 1995/04/03
@@ -692,14 +725,14 @@ Package: fp-upn 1996/10/21
 Package: fp-eval 1995/04/03
 )))
 \@dtl@toks=\toks27
-\@dtl@tmpcount=\count130
-\dtl@tmplength=\skip48
-\dtl@sortresult=\count131
-\@dtl@numgrpsepcount=\count132
-\@dtl@datatype=\count133
-\dtl@codeA=\count134
-\dtl@codeB=\count135
-\@dtl@foreach@level=\count136
+\@dtl@tmpcount=\count134
+\dtl@tmplength=\skip52
+\dtl@sortresult=\count135
+\@dtl@numgrpsepcount=\count136
+\@dtl@datatype=\count137
+\dtl@codeA=\count138
+\dtl@codeB=\count139
+\@dtl@foreach@level=\count140
 )
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries-compatible-
 307.sty
@@ -717,9 +750,9 @@ mappings.tex))
 ldf
 File: glossaries-italian.ldf 2014/11/23 v1.0
 )
-\gls@level=\count137
+\gls@level=\count141
 \@gls@tmpb=\toks28
-\gls@tmplen=\skip49
+\gls@tmplen=\skip53
 \glskeylisttok=\toks29
 \glslabeltok=\toks30
 \glsshorttok=\toks31
@@ -730,56 +763,56 @@ y
 Package: glossary-hypernav 2016/06/09 v4.25 (NLCT)
 ) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-list.sty
 Package: glossary-list 2016/06/09 v4.25 (NLCT)
-\glslistdottedwidth=\skip50
+\glslistdottedwidth=\skip54
 ) (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-long.sty
 Package: glossary-long 2016/06/09 v4.25 (NLCT)
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip51
-\LTright=\skip52
-\LTpre=\skip53
-\LTpost=\skip54
-\LTchunksize=\count138
-\LTcapwidth=\dimen118
+\LTleft=\skip55
+\LTright=\skip56
+\LTpre=\skip57
+\LTpost=\skip58
+\LTchunksize=\count142
+\LTcapwidth=\dimen127
 \LT@head=\box28
 \LT@firsthead=\box29
 \LT@foot=\box30
 \LT@lastfoot=\box31
-\LT@cols=\count139
-\LT@rows=\count140
-\c@LT@tables=\count141
-\c@LT@chunks=\count142
+\LT@cols=\count143
+\LT@rows=\count144
+\c@LT@tables=\count145
+\c@LT@chunks=\count146
 \LT@p@ftn=\toks33
 )
-\glsdescwidth=\skip55
-\glspagelistwidth=\skip56
+\glsdescwidth=\skip59
+\glspagelistwidth=\skip60
 )
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-super.sty
 Package: glossary-super 2016/06/09 v4.25 (NLCT)
 
 (/usr/share/texlive/texmf-dist/tex/latex/supertabular/supertabular.sty
 Package: supertabular 2004/02/20 v4.1e the supertabular environment
-\c@tracingst=\count143
-\ST@wd=\dimen119
-\ST@rightskip=\skip57
-\ST@leftskip=\skip58
-\ST@parfillskip=\skip59
-\ST@pageleft=\dimen120
-\ST@headht=\dimen121
-\ST@tailht=\dimen122
-\ST@pagesofar=\dimen123
-\ST@pboxht=\dimen124
-\ST@lineht=\dimen125
-\ST@stretchht=\dimen126
-\ST@prevht=\dimen127
-\ST@toadd=\dimen128
-\ST@dimen=\dimen129
+\c@tracingst=\count147
+\ST@wd=\dimen128
+\ST@rightskip=\skip61
+\ST@leftskip=\skip62
+\ST@parfillskip=\skip63
+\ST@pageleft=\dimen129
+\ST@headht=\dimen130
+\ST@tailht=\dimen131
+\ST@pagesofar=\dimen132
+\ST@pboxht=\dimen133
+\ST@lineht=\dimen134
+\ST@stretchht=\dimen135
+\ST@prevht=\dimen136
+\ST@toadd=\dimen137
+\ST@dimen=\dimen138
 \ST@pbox=\box32
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 Package: glossary-tree 2016/06/09 v4.25 (NLCT)
-\glstreeindent=\skip60
+\glstreeindent=\skip64
 ))
 \glswrite=\write4
 \glo@main@file=\write5
@@ -788,23 +821,23 @@ Package: glossary-tree 2016/06/09 v4.25 (NLCT)
 Package glossaries Info: Writing glossary file eai.glo on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count144
+\lst@mode=\count148
 \lst@gtempboxa=\box33
 \lst@token=\toks34
-\lst@length=\count145
-\lst@currlwidth=\dimen130
-\lst@column=\count146
-\lst@pos=\count147
-\lst@lostspace=\dimen131
-\lst@width=\dimen132
-\lst@newlines=\count148
-\lst@lineno=\count149
-\lst@maxwidth=\dimen133
+\lst@length=\count149
+\lst@currlwidth=\dimen139
+\lst@column=\count150
+\lst@pos=\count151
+\lst@lostspace=\dimen140
+\lst@width=\dimen141
+\lst@newlines=\count152
+\lst@lineno=\count153
+\lst@maxwidth=\dimen142
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count150
-\lst@skipnumbers=\count151
+\c@lstnumber=\count154
+\lst@skipnumbers=\count155
 \lst@framebox=\box34
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
@@ -822,7 +855,7 @@ Package color Info: Driver file: pdftex.def on input line 147.
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2016/07/10 v0.06j Graphics/color for pdfTeX
-\Gread@gobject=\count152
+\Gread@gobject=\count156
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -859,7 +892,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count153
+\c@section@level=\count157
 )
 LaTeX Info: Redefining \ref on input line 78.
 LaTeX Info: Redefining \pageref on input line 78.
@@ -869,6 +902,24 @@ LaTeX Info: Redefining \nameref on input line 78.
 \@outlinefile=\write6
 \openout6 = `eai.out'.
 
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/07/10 v1.0t Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 99.
+)
+\Gin@req@height=\dimen143
+\Gin@req@width=\dimen144
+)
 LaTeX Info: Redefining \microtypecontext on input line 78.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
@@ -884,24 +935,41 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-\c@lstlisting=\count154
+\c@lstlisting=\count158
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count155
-\scratchdimen=\dimen134
+\scratchcounter=\count159
+\scratchdimen=\dimen145
 \scratchbox=\box36
-\nofMPsegments=\count156
-\nofMParguments=\count157
+\nofMPsegments=\count160
+\nofMParguments=\count161
 \everyMPshowfont=\toks35
-\MPscratchCnt=\count158
-\MPscratchDim=\dimen135
-\MPnumerator=\count159
-\makeMPintoPDFobject=\count160
+\MPscratchCnt=\count162
+\MPscratchDim=\dimen146
+\MPnumerator=\count163
+\makeMPintoPDFobject=\count164
 \everyMPtoPDFconversion=\toks36
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 )
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+38.
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 80.
- (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
+
+(/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OML+lmm on input line 80.
@@ -984,8 +1052,12 @@ OML/lmm/m/it/10 m[] \OMS/lmsy/m/n/10 ^^@ \OML/lmm/m/it/10 m[]\OT1/lmr/m/n/10 )[
 /n/10 )[] = []
  []
 
-[7] [8]) (./matlab/imageprocessing.tex [9]
+[7] [8]) (./capitoli/segmentazione2.tex [9]
 Capitolo 2.
+) (./matlab/imageprocessing.tex [10
+
+]
+Capitolo 3.
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 31.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -994,7 +1066,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [10
+ [11
 
 ]
 Overfull \hbox (33.50615pt too wide) in paragraph at lines 33--35
@@ -1002,12 +1074,12 @@ Overfull \hbox (33.50615pt too wide) in paragraph at lines 33--35
  co-man-do []\T1/lmtt/m/n/10 f = checkerboard(40);
  []
 
-) (./eai.ind [11] [12
+) (./eai.ind [12] [13
 
 
 ]) (./eai.gls)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 89.
- [13
+ [14
 
 
 
@@ -1017,14 +1089,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 89.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 89.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 89.
 Package rerunfilecheck Info: File `eai.out' has not changed.
-(rerunfilecheck)             Checksum: EF4C1DB3A2E97B885AD95D93DAF2F49E;2127.
+(rerunfilecheck)             Checksum: 0B956E0A859664AC8FF9B8B05877D05B;2255.
  ) 
 Here is how much of TeX's memory you used:
- 15038 strings out of 493013
- 222580 string characters out of 6135681
- 484754 words of memory out of 5000000
- 18129 multiletter control sequences out of 15000+600000
- 74564 words of font info for 100 fonts, out of 8000000 for 9000
+ 15862 strings out of 493013
+ 236523 string characters out of 6135681
+ 496538 words of memory out of 5000000
+ 18909 multiletter control sequences out of 15000+600000
+ 77556 words of font info for 101 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  46i,6n,66p,1932b,2411s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dv
@@ -1042,10 +1114,10 @@ onts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmro10.
 pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/
 type1/public/lm/lmsy7.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on eai.pdf (14 pages, 338418 bytes).
+Output written on eai.pdf (15 pages, 343788 bytes).
 PDF statistics:
- 334 PDF objects out of 1000 (max. 8388607)
- 297 compressed objects within 3 object streams
- 81 named destinations out of 1000 (max. 500000)
- 23225 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 357 PDF objects out of 1000 (max. 8388607)
+ 318 compressed objects within 4 object streams
+ 90 named destinations out of 1000 (max. 500000)
+ 23753 words of extra memory for PDF output out of 24883 (max. 10000000)
 

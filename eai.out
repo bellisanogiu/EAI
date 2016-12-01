@@ -16,8 +16,10 @@
 \BOOKMARK [1][-]{section.1.15}{Spiegare le sogliature multiple}{chapter.1}% 16
 \BOOKMARK [1][-]{section.1.16}{Illustra il metodo Otsu in Matlab}{chapter.1}% 17
 \BOOKMARK [1][-]{section.1.17}{Tecniche per migliorare il global thresholding}{chapter.1}% 18
-\BOOKMARK [0][-]{chapter.2}{Image processing con Matlab}{}% 19
-\BOOKMARK [1][-]{section.2.1}{Ridimensionamento}{chapter.2}% 20
-\BOOKMARK [1][-]{section.2.2}{Trasformazioni geometriche}{chapter.2}% 21
-\BOOKMARK [1][-]{section.2.3}{Rumore}{chapter.2}% 22
-\BOOKMARK [1][-]{section.2.4}{Smoothing con thresholding}{chapter.2}% 23
+\BOOKMARK [0][-]{chapter.2}{Segmentazione}{}% 19
+\BOOKMARK [1][-]{section.2.1}{Formulazione matematiche di base}{chapter.2}% 20
+\BOOKMARK [0][-]{chapter.3}{Image processing con Matlab}{}% 21
+\BOOKMARK [1][-]{section.3.1}{Ridimensionamento}{chapter.3}% 22
+\BOOKMARK [1][-]{section.3.2}{Trasformazioni geometriche}{chapter.3}% 23
+\BOOKMARK [1][-]{section.3.3}{Rumore}{chapter.3}% 24
+\BOOKMARK [1][-]{section.3.4}{Smoothing con thresholding}{chapter.3}% 25

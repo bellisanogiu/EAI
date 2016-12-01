@@ -1,0 +1,26 @@
+\chapter{Segmentazione}
+
+\section{Formulazione matematiche di base}
+
+\begin{itemize}
+	\item \textit{R} rappresenta l'intera regione dell'immagine
+	\item la segmentazione è il processo che divide la regione \textit{R} nelle sottoregioni $R_1, R_2, \dots, R_n$ per cui valgono
+	\begin{enumerate}
+		\item $\bigcup_{i=1}^{n} R_i = R$ \quad ovvero la somma di tutte le sottoregioni è uguale all'intera regione \textit{R} dell'immagine
+		
+		\item $R_i$ è un insieme \gls{connesso} dove $i = 1, 2, \dots, n$
+		\item $R_i \cap R_j = \emptyset \quad \forall i,j \quad i \neq j$
+		\item $Q(R_i) = TRUE \quad i = 1, 2, \dots, n$
+		\item $Q(R_i \cup R_j) = FALSE \quad \text{per ogni regione adiacente } R_i$ e $R_j$
+	\end{enumerate}
+\end{itemize}
+
+\section{Region growing}
+E' una procedura che raggruppa i pixel o le sottoregioni in regioni più grandi basandosi su criteri predefiniti.
+
+L'approccio base è il seguente:
+
+\begin{itemize}
+	\item si parte con un insieme di punti "seme"
+	\item 
+\end{itemize}
