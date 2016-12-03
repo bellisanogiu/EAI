@@ -18,8 +18,19 @@
 \BOOKMARK [1][-]{section.1.17}{Tecniche per migliorare il global thresholding}{chapter.1}% 18
 \BOOKMARK [0][-]{chapter.2}{Segmentazione}{}% 19
 \BOOKMARK [1][-]{section.2.1}{Formulazione matematiche di base}{chapter.2}% 20
-\BOOKMARK [0][-]{chapter.3}{Image processing con Matlab}{}% 21
-\BOOKMARK [1][-]{section.3.1}{Ridimensionamento}{chapter.3}% 22
-\BOOKMARK [1][-]{section.3.2}{Trasformazioni geometriche}{chapter.3}% 23
-\BOOKMARK [1][-]{section.3.3}{Rumore}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.4}{Smoothing con thresholding}{chapter.3}% 25
+\BOOKMARK [1][-]{section.2.2}{Region growing}{chapter.2}% 21
+\BOOKMARK [1][-]{section.2.3}{Qual \350 l'algoritmo di un region growing?}{chapter.2}% 22
+\BOOKMARK [1][-]{section.2.4}{Region Splitting and Merging}{chapter.2}% 23
+\BOOKMARK [2][-]{subsection.2.4.1}{Definizione}{section.2.4}% 24
+\BOOKMARK [2][-]{subsection.2.4.2}{Region Splitting and Merging: algoritmo}{section.2.4}% 25
+\BOOKMARK [2][-]{subsection.2.4.3}{Region Splitting and Merging: tecniche di rappresentazione}{section.2.4}% 26
+\BOOKMARK [2][-]{subsection.2.4.4}{Caratteristiche}{section.2.4}% 27
+\BOOKMARK [2][-]{subsection.2.4.5}{Algoritmo per lo splitting and merging}{section.2.4}% 28
+\BOOKMARK [2][-]{subsection.2.4.6}{Region growing Matlab}{section.2.4}% 29
+\BOOKMARK [2][-]{subsection.2.4.7}{Region growing Matlab: le funzioni}{section.2.4}% 30
+\BOOKMARK [2][-]{subsection.2.4.8}{Region Splittin and Merging in Matlab: splitmerge}{section.2.4}% 31
+\BOOKMARK [0][-]{chapter.3}{Image processing con Matlab}{}% 32
+\BOOKMARK [1][-]{section.3.1}{Ridimensionamento}{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.2}{Trasformazioni geometriche}{chapter.3}% 34
+\BOOKMARK [1][-]{section.3.3}{Rumore}{chapter.3}% 35
+\BOOKMARK [1][-]{section.3.4}{Smoothing con thresholding}{chapter.3}% 36

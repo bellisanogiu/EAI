@@ -22,5 +22,267 @@ L'approccio base è il seguente:
 
 \begin{itemize}
 	\item si parte con un insieme di punti "seme"
-	\item 
+	\item da queste grow regioni si aggiungono ad ogni seme i suoi pixel vicini che hanno dele predefinite proprietà simili a quelle del seme (come uno specifico range di intensità o un colore)
+	\item è importante selezionare con attenzione i punti \textit{da cui partire} in base al tipo di problema o all'immagine da processare.
+	\begin{itemize}
+			\item le immagini satellitati dipendono dal colore
+			\item le immagini monocramatiche dipendono dai descrittori basati sui livelli di intensità e sulle proprietà spaziali (texture, momenti)
+	\end{itemize}
+	
+	\item devono essere usate le proprietà della connessione
+	\item si deve formulare una regola di stop
 \end{itemize}
+
+\section{Qual è l'algoritmo di un region growing?}
+
+\begin{itemize}
+	\item si assume che:
+
+\begin{itemize}
+	\item $f(x, y)$ è un'immagine in ingresso
+	\item $S(x, y)$ indica un array di semi contenente un 1s nei posti dei punti del seme e 0 negli altri punti
+	\item $Q$ indica un predicato che verrà applicato ad ogni locazione $(x, y)$
+\end{itemize}
+
+	\item si assume che gli array $f$ ed $S$ abbiano la stessa dimensione
+	\item si utilizza una 8-connessione
+\end{itemize}
+
+Con queste premesse si applica il seguente algoritmo:
+
+\begin{enumerate}
+	\item si trovano tutte le componenti in $S(x, y)$
+	
+	\begin{itemize}
+		\item si erode ogni componente connessa sino ad ottenere un solo pixel
+		\item si etichetta (label) ogni pixel trovato con il valore $1$
+		\item si etichettano tutti gli altri pixel in $S$ con il valore $0$
+	\end{itemize}
+	
+	\item si realizza un'immagine $f_q$, tale che per ogni coppia di coordinate $(x, y)$ si abbia che:
+	
+		\begin{itemize}
+			\item $F_q(x, y) = 1$ se l'immagine in ingresso soddisfa il predicato $Q$ a queste coordinate
+			\item $f_q(x, y) = 0$ negli altri casi
+		\end{itemize}
+		
+		\item si forma così un'immagine $g$ realizzata aggiungendo ad ogni punto seme in $S$ tutti i punti 1-valutati in $f_q$ che sono 8-connessioni al punto seme
+		
+		\item si etichetta ogni componente connessa in $g$ con una etichetta di regione differente (1, 2, 3, \dots). Questa è così l'immagine segmentata ottenuta attraverso l'algoritmo region growing
+\end{enumerate}
+
+\section{Region Splitting and Merging}
+\subsection{Definizione}
+Si tratta di una procedura che suddivide un'immagine prima di tutto in un insieme arbitrario di regioni disgiunte e quindi le fonde (merge) e/o le suddivide in regioni che soddisfino i requisiti della segmentazione.
+
+\subsection{Region Splitting and Merging: algoritmo}
+\begin{itemize}
+	\item si assuma che:
+	\begin{itemize}
+		\item $R$ è la regione che rappresenta l'intera immagine
+		\item sia $Q$ il predicato utilizzato
+	\end{itemize}
+	
+	\item si parte con l'intera regione $R$ suddividendo questa in quadranti sempre più piccoli $R_i$, dove per ognuno di essi vale che $Q(R_i) = TRUE$. 
+	\begin{itemize}
+		\item se $Q(R) = FALSE$ si divide l'immagine in nuovi quadranti
+		\item se $Q = FALSE$ per ogni quadrante, si suddivide il quadrante in ulteriori sotto-quadranti e così via
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Region Splitting and Merging: tecniche di rappresentazione}
+
+Una delle tecniche più utilizzata è denominata \textbf{Quadtree}:
+
+\begin{itemize}
+	\item si tratta di un albero in cui cui ogni nodo ha 4 discendenti
+	\item la radice corrisponde all'intera immagine
+	\item ogni nodo corrisponde a 4 foglie
+\end{itemize}
+
+\subsection{Caratteristiche}
+\begin{itemize}
+	\item se viene usato solo lo \textit{splitting} la partizione finale contiene regioni adiacenti con proprietà identiche
+	
+	\item soddisfare i vincoli di segmentazione richiede la	fusione solo delle regioni adiacenti i cui pixel soddisfano il predicato $Q$:
+	
+	\begin{itemize}
+		\item due regioni adiacenti $R_i$ e $R_j$ sono fuse solo se vale: $Q(R_i \cup R_j) = TRUE$
+	\end{itemize}
+\end{itemize}
+
+\subsection{Algoritmo per lo splitting and merging}
+\begin{enumerate}
+	\item si suddivide in 4 quadranti disgiunti ogni regione $R_j$ per cui $Q(R_i) = FALSE$
+	
+	\item quando non è possibile un ulteriore suddivisione, si fonde ogni regione $R_i$ e $R_j$ adiacente per cui $Q(R_i \cup R_j) = TRUE$
+	
+	\item ci si ferma quando non sono possibili ulteriori fusioni
+\end{enumerate}
+
+Si è soliti indicare una dimensione minima quadregion oltre il quale nessuna ulteriore frazionamento sia effettuato.
+
+\textbf{una variante}: la fusione di due qualsiasi regioni adiacenti $R_i$ e $R_j$ se
+ognuno soddisfa il predicato singolarmente.
+
+\subsection{Region growing Matlab}
+
+\begin{lstlisting}
+function [g, NR, SI, TI] = regiongrow(f, S, T)
+f = double(f);
+% if S is a scalar, obtain the seed image
+if numel(S) == 1
+SI = f == S;
+S1 = S;
+else
+SI = bwmorph(S, 'shrink', Inf);
+J = find(SI);
+S1 = f(J); % Array of seed values
+end
+TI = false(size(f));
+for K = 1:length(S1)
+seedvalue = S1(K);
+S = abs(f - seedvalue) <= T;
+TI = TI | S;
+end
+[g, NR] = bwlabel(imreconstruct(SI, TI));
+\end{lstlisting}
+
+S can be an array (the same size as f) with a 1
+at the coordinates of every seed point and 0s
+elsewhere. S can also be a single seed value.
+(Our example S = 255)
+
+Similarly, T can be an array (the same size as
+f) containing a threshold value for each pixel in
+f. T can also be a scalar, in which case it
+becomes a global threshold.
+(Our example T = 65)
+
+g is the result of region growing, with each
+region labelled by a different integer.
+
+NR is the number of regions.
+
+SI is the final seed image used by the
+algorithm.
+
+TI is the image consisting of the pixels in f
+satisfied the threshold test.
+
+Use function imreconstruct with SI as the
+marker image to obtain the regions
+corresponding to each seed in S.
+
+bwlabel assigns a different integer to each
+connected region.
+
+\subsection{Region growing Matlab: le funzioni}
+\begin{itemize}
+\item la funzione predefinita per implementare il quadtree è \textit{qtdecomp} con la sintassi:
+
+$$S = qtdecomp(f, @split_test, parameters)$$
+
+\begin{itemize} 
+\item $f$ è l'immagine di ingresso
+\item $S$ è una matrice sparsa contenente la struttura quadtree
+
+	\begin{itemize}
+		\item se $S(k, m) \neq 0 $, allora $(K, m)$ è l'estremo superiore sinistro del blocco in decomposizione e la dimensione del blocco è data da $S(k, m)$
+	\end{itemize}
+
+\item la funzione $split_test$ è usata per determinare se una regione deve essere divisa o meno
+\item $parameters$ indica eventuali parametri addizionali 
+\end{itemize}
+	
+\item per ottenere i valori dei pixel della quadregion in una decomposizione quadtree, si utilizza la funzione \textbf{qtgetblk} con la sintassi:
+
+$$[vals, r, c] = qtgetblk(f, S, m)$$
+
+\begin{itemize}
+	\item $vals$ è un array che contiene i valori dei blocchi di dimensione $mXm$ nella decomposizione quadtree $f$
+	\item $S$ è la matrice sparsa restituita dalla funzione $qtdecomp$
+	\item i parametri $r, c$ sono dei vettori che contengono le coordinate della riga e della colonna degli angoli in alto a sinistra dei blocchi
+\end{itemize}
+
+\item la funzione che implementa l'algoritmo di segmentazione è \textbf{splitmerge} che la seguente sintassi:
+
+$$g = splitmerge(f, mindim, @predicate)$$
+
+begin{itemize} 
+\item $f$ è l'immagine di ingresso
+\item $g$ è l'immagine in uscita
+\item $mindim$ definisce la dimensione del più piccolo blocco nella decomposizione (potenza di 2)
+\item $predicate$ è una funzione definita dall'utente che deve essere inclusa nell'ambiente (path) di Matlab. La sua sintassi è:
+\begin{itemize}
+	\item $flag = predicate(region)$
+	\item restituisce $true$ (1) se i pixel nella regione soddisfa il predicato definito dal codice nella funzione
+	\item restituisce $false$ (0) negli altri casi
+	
+	\item 
+	\begin{lstlisting}
+		function flag = predicate(region)
+		sd = std2(region);
+		m = mean2(region);
+		flag = (sd > 10) & (m > 0) & (m < 125);
+	\end{lstlisting}
+\end{itemize}
+\end{itemize}
+
+\subsection{Region Splittin and Merging in Matlab: splitmerge}
+\begin{lstlisting}
+function g = splitmerge(f, mindim, fun)
+Q = 2^nextpow2(max(size(f)));
+[M, N] = size(f);
+f = padarray(f, [Q - M, Q - N], 'post');
+
+S = qtdecomp(f, @split_test, mindim, fun);
+
+Lmax = full(max(S(:)));
+
+g = zeros(size(f));
+MARKER = zeros(size(f));
+
+for K = 1: Lmax
+	[vals, r, c] = qtgetblk(f, S, K);
+	if ~isempty(vals)
+		for I = 1:length(r)
+			xlow = r(I);
+			ylow = c(I);
+			xhigh = xlow + K -1;
+			yhigh = ylow + K -1;
+			region = f(xlow:xhigh, ylow:yhigh);
+			flag = feval(fun, region);
+			if flag
+				g(xlow:xhigh, ylow:yhigh) = 1;
+				MARKER(xlow, ylow) = 1;
+			end
+		end
+	end
+end
+
+g = bwlabel(imreconstruct(MARKER, g));
+g = g(1:M, 1:N);
+\end{lstlisting}
+
+\subsection{Region Splitting and Merging in Matlab: split_test}
+\begin{lstlisting}
+function v = split_test(B, mindim, fun)
+
+k = size(B,3);
+v(1:k) = false;
+
+for I = 1:k
+	quadregion = B(:, :, I);
+	if size(quadregion, 1) <= mindim
+		v(I) = false;
+		continue;
+	end
+	
+	flag = feval(fun, quadregion);
+	if flag
+		v(I) = true;
+	end
+end
+\end{lstlisting}
