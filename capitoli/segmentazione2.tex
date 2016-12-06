@@ -25,8 +25,8 @@ L'approccio base è il seguente:
 	\item da queste grow regioni si aggiungono ad ogni seme i suoi pixel vicini che hanno dele predefinite proprietà simili a quelle del seme (come uno specifico range di intensità o un colore)
 	\item è importante selezionare con attenzione i punti \textit{da cui partire} in base al tipo di problema o all'immagine da processare.
 	\begin{itemize}
-			\item le immagini satellitati dipendono dal colore
-			\item le immagini monocramatiche dipendono dai descrittori basati sui livelli di intensità e sulle proprietà spaziali (texture, momenti)
+			\item le immagini satellitari dipendono dal colore
+			\item le immagini monocromatiche dipendono dai descrittori basati sui livelli di intensità e sulle proprietà spaziali (texture, momenti)
 	\end{itemize}
 	
 	\item devono essere usate le proprietà della connessione
@@ -266,7 +266,7 @@ g = bwlabel(imreconstruct(MARKER, g));
 g = g(1:M, 1:N);
 \end{lstlisting}
 
-\subsection{Region Splitting and Merging in Matlab: split_test}
+\subsection{Region Splitting and Merging in Matlab: split test}
 \begin{lstlisting}
 function v = split_test(B, mindim, fun)
 

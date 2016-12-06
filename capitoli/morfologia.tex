@@ -1,0 +1,110 @@
+\chapter{Morfologia}
+
+\section{Introduzione}
+La morfologia è una branca della biologia che tratta le forme e la struttura di animali e piante. Nel contesto dell'elaborazione delle immagini, la \textbf{morfologia matematica} è uno strumento che è utile per:
+
+\begin{itemize}
+	\item estrarre componenti dall'immagine che sia utili per rappresentare e descrivere regiorni come confini, scheletri, e gusci convessi
+	
+	\item attuare tecniche di processing come il filtraggio morfologico il thinning e il pruning (potatura)
+\end{itemize}
+
+\subsection{Campi di utilizzo della morfologia matematica}
+\begin{itemize}
+	\item image enhancement
+	\item image restoration
+	\item noise reduction
+	\item space-time filtering
+	\item image segmentation
+	\item edge detection
+	\item texture analysis
+	\item particle analysis
+	\item component analysis
+	\item shape analysis
+	\item feature generation
+	\item feature detection
+	\item skeletonization
+	\item general thinning
+	\item curve filling
+	\item image compression
+\end{itemize}
+
+\subsection{Il linguaggio della morfologia matematica}
+Il linguaggio alla base della morfologia matematica (denominato MM) è basato sulla \textbf{teoria degli insiemi}.
+
+Si campionano le partizioni $xy$ del piano in una griglia, con le coordinate del centro di ogni griglia che diventano un paio di elementi che formano lo spazio degli interni 2D $ZxZ(x^2)$ tale che è l'insieme di tutte le coppie di elementi ordinati $(a, b), a,b \in Z$
+
+Gli \textbf{insiemi} nella MM rappresentano le forme degli oggetti in una immagine.
+\begin{itemize}
+	\item l'insieme di tutti i pixel neri in una immagine binaria è una descrizione completa dell'immagine
+	
+	\item in una immagine binari gli insiemi in questione sono membri $Z^2$ dove ogni elemento di un insieme è una 2-tupla (o un 2-D vettore) le cui le coordinate $x, y$ sono le coordinate di un pixel bianco (o nero a seconda della convenzione adottata) nell'immagine
+\end{itemize}
+
+\subsection{Altri concetti della teoria degli insiemi}
+
+\begin{itemize}
+	\item sia $A$ un insieme in $z^2$ con elementi $(x, y)$:
+	\begin{itemize}
+		\item se $w = (x, y)$ è un elemento di $A, \quad w \in A$
+		\item se $w = (x, y)$ non è un elemento di $A, \quad w \notin A$
+	\end{itemize}
+	
+	\item un insieme di pixel $B$ che soddisfa una particolare condizione è scritto come:
+	$$
+	B = \{w | \text{condizione}\}
+	$$
+	
+	\item il \textbf{complemento di A} è l'insieme di tutte le coordinate di pixel che non appartengono ad $A$ è indicato con $A^c$:
+	$$
+	A^C = \{w | w \notin A \}
+	$$
+	
+	\item l'\textbf{unione} di due insiemi $A$ e $B$ è l'insieme formato da tutti gli elementi di $A$ e $B$ ed è indicato come:
+	$$
+	C = A \cup B
+	$$
+	
+	\item l'\textbf{intersezione} di due insiemi $A$ e $B$ è l'insieme formato da tutti gli elementi che appartengono sia ad $A$ che a $B$ ed è indicato come:
+	$$
+	C = A \cap B
+	$$
+	
+	\item la \textbf{differenza} di due insiemi $A$ e $B$ è l'insieme degli elementi che appartengono ad $A$ ma non a $B$ ed è indicato come:
+	$$
+	A – B = \{w | w \in A, w \notin B\}
+	$$
+	
+	\item la \textbf{riflessione} di un insieme $B$ indicato con $\hat B$:
+	$$
+	\hat B = \{w | w = -b, \quad b \in B\}
+	$$
+	
+	\item la \textbf{traslazione} di un insieme $B$ di un punto $z =(z_1, z_2)$ è indicato con $(B)_z$ e definito come:
+	$$
+	(B)_z = \{c|c= b + z, \quad b \in B \}
+	$$
+\end{itemize}
+
+\subsection{Altri concetti dalla teoria degli insiemi}
+\begin{itemize}
+	\item una immagine binaria può essere vista come una funzione bivalued di $x$ e $y$
+	
+	\item per la teoria MM una immagine binaria è un insieme di pixel in primo piano (1-valued), che si trovano in $Z^2$
+	
+	\item le operazioni come unione e intersezione possono essere applicate direttamente gli insiemi di immagini binarie
+	
+	\item le operazioni di riflessione e traslazione sono impiegate spesso nella morfologia per formulare operazioni basate sugli \textbf{elementi strutturati} (SEs)
+	\begin{itemize}
+		\item SEs sono piccoli insiemi di sottoimmagini usate per sondare un'immagine e studiarne le proprietà desiderate
+		
+		\item SEs quando lavorano con le immagini, sono degli array rettangolari e ciò si ottiene aggiungendo il minor numero possibile di elementi di sfondo necessari per formare una matrice rettangolare
+		
+		\item si crea un nuovo insieme facendo scorrere $B$ su $A$ in modo che l'origine di $B$ visiti ogni elemento di $A$
+		
+		\item ogni parte dell'origine $B$, se questo è contenuto in $BA$, marca la parte come membro di in un nuovo insieme (indicato come ombreggiato), altrimenti non viene marcato come parte di un nuovo elemento (indicato come non ombreggiato)
+		
+		\item il risultato è che il confine dell'insieme viene \textbf{eroso}
+	\end{itemize}
+\end{itemize}
+
