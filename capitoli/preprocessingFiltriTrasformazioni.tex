@@ -1,0 +1,192 @@
+\chapter{Pre-processing, filtri spaziali, trasformazioni}
+
+\section{Cosa si intende per preprocessing di una immagine?}
+immagini. Lo scopo è quello di enfatizzare una certa caratteristica allo scopo di rendere più adatta l'immagine a computazioni future di livello più alto. Esistono quattro categorie di metodi:
+\begin{itemize}
+	\item \textbf{trasformazioni della luminosità}: In questo ambito si parla di:
+		\begin{itemize}
+			\item \textbf{correzione di luminosità} quando per modificare il valore di un pixel si tiene conto del valore precedentemente 	associato al pixel stesso e della sua posizione nell'immagine
+			
+			\item \textbf{trasformazione della scala di grigio} quando si modificano i toni senza tener conto della posizione dei pixel nell'immagine
+		\end{itemize}
+	
+	\item \textbf{trasformazioni geometriche} che permettono l'eliminazione di distorsioni geometriche che si presentano alla cattura dell'immagine. Esempi di trasformazione geometrica sono la rototraslazione e il cambiamento di scala
+	
+	\item \textbf{metodi di preprocessing} che usano un intorno del pixel processato
+	
+	\item \textbf{ristrutturazione di immagini} (richiede info sull'intera immagine)
+\end{itemize}
+
+\section{Descrivere i metodi di preprocessing di una immagine}
+\begin{itemize}
+	\item \textbf{trasformazioni della luminosità}
+	\begin{itemize}
+		\item \textbf{Correzione di luminosità (dipendente dalla posizione)}: Spesso l'immagine può essere degradata a causa dell'illuminazione dell'oggetto ripreso o della sensibilità del dispositivo di cattura dell'immagine.
+		Sia e(i, j) la funzione che perturba la funzione ideale $g(i, j)$ e sia $f (i, j) = e(i, j) \cdotp g(i, j)$ l'immagine degradata. Se l'immagine ideale g(i, j) è nota a priori (ad esempio unafunzione costante che assume il valore e in tutto il suo dominio) indichiamo con $f_c (i, j)$ l'immagine affetta da degrado e possiamo concludere che:
+		$$
+		g(i,j) = f(i,j)= c \cdotp f)i,j)= c \cdotp (i,j)
+		$$
+		
+		\item \textbf{Trasformazione della scala di grigio}: È una tecnica che non tiene conto della posizione dei pixel e viene spesso usata quando il risultato deve essere direttamente mostrato all'occhio umano. Si può ottenere mediante contrast stretching o equalizzazione dell'istogramma
+	\end{itemize}
+	
+	\item \textbf{Trasformazioni geometriche}: Permettono l'eliminazione di distorsioni geometriche che si 	presentano alla cattura dell'immagine. Esempi di trasformazione geometrica sono la	rotazione,traslazione, distorsione e cambiamento di scala.
+	
+	Una trasformazione è una funzione vettore T che mappa un pixel in posizione (x,y) in una nuova posizione (x',y'):
+	$$
+	x' = Tx(x,y) \qquad y'= Ty(x,y)
+	$$
+	
+	Quindi  passi di trasformazione sono 2:
+	\begin{itemize}
+		\item determinare la trasformazione di coordinate del pixel (cioè date (x,y) determinare (x',y')
+		
+		\item determinare l'intensità del pixel nelle nuove coordinate (generalmente utilizzando l'interpolazione dei valori di intensità dei pixel dell'intorno del pixel trasformato e si possono distinguere diversi metodi quali il 'nearest neighbor interpolation', in cui si prende	il valore del pixel più vicino, la 'bilinear interpolation' in cui si analizzano i 4 pixel più vicini, e la 'bicubic interpolation' in cui si analizzano i 16 pixel più vicini)
+	\end{itemize}
+	
+	\item \textbf{Metodi di preprocessing che usano un intorno del pixel processato}: I metodi di pre-processing che usano un piccolo intorno di pixel nell'immagine in input per determinare il nuovo valore di luminosità nell'output sono definiti metodi di filtrazione. Essi si possono dividere in due macro categorie:
+	\begin{itemize}
+		\item \textbf{operatori di smoothing}: si occupano di ridurre il rumore o piccole fluttuazioni in un immagine
+		
+		\item \textbf{operatori gradiente}: si occupano di rilevare i punti di edge dell'immagine
+	\end{itemize}
+	
+	L'operazione tipica di questa categoria di metodi è la convoluzione, un operazione lineare che produce un valore di luminosità per l'immagine in output in base alla combinazione lineare dei pixel in input che appartengono all'intorno del punto in esame. Ad ogni pixel dell'intorno è associato un peso che ne determina il contributo.
+	
+	\item \textbf{ristrutturazione di immagini} (richiede info sull'intera immagine): Il restauro infine serve per ricostruire il contenuto informativo e visivo delle immagini corrotte da un punto di vista	oggettivo, a differenza delle operazioni che ricadono nell'image enhancement (miglioramento dell'immagine) che invece sono soggettive e dipendono da ciò che un singolo individuo ritiene essere un "buon" risultato.
+	
+	Prendendo in ingresso un'immagine degradata, il restauro ha come obbiettivo quello di ottenere l'immagine originale senza degrado, avendo a disposizione delle informazioni riguardo al degrado stesso e applicando quindi un "degrado inverso".
+\end{itemize}
+
+\section{Cosa si intende per filtro spaziale?}
+Con filtraggio spaziale si intende un'operazione che coinvolge un intorno di pixel dell'immagine ed una sottoimmagine (chiamata generalmente maschera o filtro) della stessa dimensione dell'intorno.
+
+Si effettuano operazioni di filtraggio per evidenziare certe caratteristiche o rimuoverne altre.
+
+I metodi di filtrazione possono essere divisi in due macro categorie:
+\begin{itemize}
+	\item \textbf{operatori di smoothing}: si occupano di ridurre il rumore o piccole fluttuazioni in un immagine. Sfortunatamente questo comporta una perdita di dettaglio nei punti di edge, che contengono molte delle informazioni associate all'immagine stessa. (Corrispondono alla soppressione delle alte
+	frequenze nel dominio delle frequenze).
+	
+	\item \textbf{operatori gradiente}: si basano sulle derivate parziali locali della funzione immagine. Le derivate sono maggiori nei punti in cui la funzione subisce un rapido cambiamento (sono i punti di edge). L'operatore gradiente ha il compito di indicare una tali punti aumentandone il dettaglio. Sfortunatamente applicando un operatore gradiente su un immagine il livello di rumore cresce notevolmente.
+\end{itemize}
+
+In pratica il processo di filtraggio nel dominio spaziale consiste nello spostare la maschera di filtraggio (che ha dimensione dispari in modo da poter far coincidere il centro con ogni punto dell'immagine) da un punto all'altro dell'immagine. Per ogni punto di coordinate (x,y) nell'immagine originale, il risultato del filtraggio in quel punto è calcolato valutando i valori dell'intorno di quel punto con i valori contenuti nella maschera, ponendo infine il risultato nel punto di coordinate (x,y) dell'immagine finale.
+
+Con filtro spaziale lineare in particolare si intende che il risultato è dato dalla somma dei prodotti dei valori della maschera per i valori dell'intorno del punto con cui coincide il centro della maschera nell'immagine originale.
+
+Per una maschera w di dimensioni 3X3 applicata al punto (x,y) di un'immagine, il risultato R sarebbe:
+
+$$
+R= w(-1,-1)*f(x-1,y-1) + w(-1,O)*f(x-1,y) + w(-1,1)*f(x-1,y+1) + w(O,-1)*f(x,y-1) + w(O,O)*f(x,y) + w(O,1)*f(x,y+1) + w(1,-1)*f(x+1,y-1) + w(1,O)*f(x+1,y) + w(1,1)*f(x+1,y+1)
+$$
+
+Con filtro spaziale non lineare si intende che il risultato è basato sull'ordinamento dei pixel contenuti nell'intorno di un'immagine e sulla sostituzione del pixel centrale dell'intorno con il valore determinato dal risultato dell'ordinamento (ranking filters)
+
+\section{Cosa si intende per trasformata di una immagine?}
+
+In alcuni casi alcuni task dell'image processing sono meglio formulati trasformando l'immagine di input portandola su di un nuovo dominio di trasformazione; risolvendo il generico problema da affrontare; riportando l'immagine in output al dominio spaziale originale utilizzando la trasformazione inversa.
+
+Una particolare classe di trasformate lineare 2D T(u,v) può essere espresso nella forma generale:
+
+$$
+T(u,v) = \sum_{x=0}^{M-1} \sum_{y=0}^{N-1} f(x,y) \, r(x, y, u, v)
+$$
+
+dove f(x,y) è l'immagine originale; r(x,y,u,v) è detta forward transformation kernel e u,v sono le variabili di trasformazione.
+
+La trasformata inversa invece è:
+
+$$
+f(x,y) = \sum_{u=0}^{M-1} \sum_{v=0}^{N-1} T(u,v) \, s(x, y, u, v)
+$$
+
+dove s(x,y,u,v) è detta inverse transformation kernel
+
+\section{Cosa si intende per equalizzazione di un istogramma? A cosa serve?}
+È una tecnica utilizzata per spalmare i livelli di intensità di un immagine sull'intero range disponibile. In pratica si fa in modo che un qualsiasi tono di grigio possa presentarsi in un qualsiasi pixel con la stessa probabilità.
+
+Se H(x) è l'istogramma dell'immagine originale noi possiamo cambiare l'istogramma attraverso l'uso di una funzione $y=y(x)$ cosi che l'istogramma $G(y)$ dell'immagine trasformata è costante per tutti i valori di luminosità, $G(y) = C$. La relazione tra H e G e la funzione y è data da:
+$$
+H(x)dx = G(y)dy = Cdy
+$$
+
+L'algoritmo per l'equalizzazione è quindi:
+\begin{enumerate}
+	\item valutare l'istogramma H(x)
+	\item computare y(x)= (256/sommatoria di H(k))* sommatoria di H(k)
+	\item applicare la trasformazione y(x)
+\end{enumerate}
+
+\section{Come si può realizzare uno stretching del contrasto presente in una immagine?}
+Se l'immagine non utilizza il 1OO\% del range di luminosità a disposizione è possibile migliorare l'immagine spalmando i valori di luminosità dei singoli pixel lungo tutta la gamma dinamica. Se i valori di luminosità vanno da $0$ a $2^B-1$ allora il valore minimo (min) dovrà essere mappato sullo $0$ a ed il valore massimo (max) sul $2^B-1$ con i valori intermedi che saranno mappati di conseguenza secondo la formula:
+$$
+b[m,n] = 2^B-1 \cdotp \frac{a[m,n - min]}{max-min}
+$$
+
+Il risultato ottenuto sarà quindi un miglioramento del contrasto.
+
+\section{Definire un filtro spaziale lineare}
+Con filtraggio spaziale si intende un'operazione che coinvolge un intorno di pixel dell'immagine ed una sottoimmagine (chiamata generalmente maschera o filtro) della stessa dimensione dell'intorno. In pratica il processo di filtraggio nel dominio spaziale consiste nello spostare la maschera di filtraggio (che ha dimensione dispari in modo da poter far coincidere il centro con ogni punto dell'immagine) da un punto all'altro dell'immagine. Per ogni punto di coordinate (x,y) nell'immagine originale, il risultato del filtraggio in quel punto è calcolato valutando i valori dell'intorno di quel punto con i valori contenuti nella maschera, ponendo infine il risultato nel punto
+di coordinate (x,y) dell'immagine finale.
+
+Un filtro spaziale lineare è un filtro in cui il valore di un pixel di output è combinazione lineare dei valori dei pixel dell'intorno del pixel in input.
+
+Il risultato è dato dalla somma dei prodotti dei valori della maschera per i valori dell'intorno del punto con cui coincide il centro della maschera nell'immagine originale.
+Per una maschera w di dimensioni 3X3 applicata al punto (x,y) di un'immagine, il risultato R sarebbe:
+$$
+R= w(-1,-1)*f(x-1,y-1) + w(-1,O)*f(x-1,y) + w(-1,1)*f(x-1,y+1) + w(O,-1)*f(x,y-1) + w(O,O)*f(x,y) + w(O,1)*f(x,y+1) + w(1,-1)*f(x+1,y-1) + w(1,O)*f(x+1,y) + w(1,1)*f(x+1,y+1)
+$$
+
+Con filtro spaziale non lineare si intende che il risultato è basato sull'ordinamento dei pixel contenuti nell'intorno di un'immagine e sulla sostituzione del pixel centrale dell'intorno con il valore determinato dal risultato dell'ordinamento (ranking filters)
+
+\section{Cosa si intende per operatore lineare?}
+Sia H un operatore che produce in output un'immagine g(x,y) dall'immagine input f(x,y). H è definito operatore lineare se:
+$$
+H[a_i f_i (x,y) + a_j f_j(x,y)] = a_i H[f_i(x,y)] + a_j H[f_j(x,y)] = a_i g_i(x,y) + a_j g_j(x,y)
+$$
+
+Dove $f_i(x,y)$ ed $f_j(x,y)$ sono immagini ed $a_i$ e $a_j$ sono costanti della stessa dimensione delle immagini.
+
+\section{Correlazione e convoluzione spaziale. Spiegarne le differenze}
+La convoluzione è un operazione lineare che produce un valore di luminosità per l'immagine in output in base alla combinazione lineare dei pixel in input che appartengono all'intorno del punto in esame. Ad ogni pixel dell'intorno è associato un peso che ne determina il contributo. Le maschere di convoluzione di solito hanno righe e colonne dispari così da identificare nel loro centro il pixel in esame.
+$$
+f(i,j) = \sum_{m=-r_i}^{r_i} \sum_{n=-r_j}^{r_j} h (r_i+1 -m, r_j+1-n) g(i+m, j+n) 
+$$
+Questa sopra è l'equazione discreta della convoluzione con kernel h, che indichiamo con la notazione g * h . O rappresenta invece il rettangolo di dimensioni dispari dei vicini del punto in esame. Dal punto di vista matematico l'operatore di convoluzione gode delle seguenti proprietà:
+\begin{itemize}
+	\item commutativa: X * Y = Y * X
+	\item associativa: (X * Y) * Z =  X * (Y * Z)
+	\item distributiva: X * (Y + Z) = X * Y + X * Z
+\end{itemize}
+
+La correlazione segue lo stesso procedimento della convoluzione, ma nella convoluzione la maschera viene ruotata di 180° prima di essere utilizzata.
+
+\section{Descrivere i filtri per lo smoothing nel dominio spaziale}
+Gli operatori di smoothing si occupano di ridurre il rumore o piccole fluttuazioni in un immagine. Sfortunatamente questo comporta una perdita di dettaglio nei punti di edge, che contengono molte delle informazioni associate all'immagine stessa, per cui si cerca di avere degli operatori di smoothing edge preserving. Lo smoothing corrisponde alla soppressione delle alte frequenze nel dominio delle frequenze. Tra i diversi filtri abbiamo studiato i seguenti:
+\begin{itemize}
+	\item \textbf{Averaging}: Si assuma che il livello di rumore v in ogni pixel sia determinato da una variabile casuale di media zero e varianza $\sigma$. Avendo a disposizione n acquisizioni di una stessa scena statica il risultato dello smoothing sarebbe, per ogni pixel dell'immagine, la media delle n acquisizioni sommata alla media degli n rumori presenti sul singolo punto:
+	
+	Se non sono disponibili n acquisizioni di una stessa immagine il rumore si elimina mediando con l'intorno di un ogni pixel. Per ottenere risultati soddisfacenti occorre che il rumore sia di dimensione inferiore rispetto al più piccolo oggetto d'interesse presente nell'immagine. Gli edge verranno comunque sporcati. In questo senso l'averaging rappresenta un caso particolare di convoluzione in cui le maschere h sono del tipo
+	
+	Nel secondo e terzo esempio si da un maggior peso al pixel centrale e ai pixel del 4-intorno per meglio riflettere le proprietà del rumore Gaussiano.
+	
+	\item \textbf{Averaging con valori limitati}: Rimane il problema dell'edge preserving. Esiste una variante dell'averaging classico che consente di calcolare la media solo sui pixel che soddisfano un certo criterio, queste tecniche sono non lineari. Il primo criterio consiste nel	prendere solo i pixel la cui luminosità rientra in un certo range; considerando un pixel (m,n):
+	\begin{itemize}
+		\item se il valore associato ad (m,n) è valido non si effettua nessuna operazione
+		\item se, invece, il valore non è valido si applica l'averaging sul suo intorno $O$ attraverso la maschera di convoluzione definita come:
+		$$
+		h(i,j) =
+		\begin{cases}
+		1 & \quad \text{se } g(m + 1, n + j) \notin [min, max]\\
+		0 & \quad \text{altrimenti }
+		\end{cases}
+		$$
+	\end{itemize}
+	
+	\textbf{Un secondo metodo} potrebbe essere quello di calcolare l'averaging su ogni pixel ma scartare i 	valori trovati che non rientrano in un certo range. Un terzo metodo utilizza la magnitudine degli edge come criterio (di fatto la norma del gradiente). La norma viene calcolata a priori per ogni punto dell'immagine e solo i punti il cui gradiente sta al di sotto di una certa soglia vengono utilizzati per l'averaging.
+	
+	\item \textbf{Median Smoothing}: La mediana di un insieme di valori è il valore centrale. Il median smoothing sostituisce il valore di luminosità di ogni pixel con la mediana delle luminosità dei pixel del suo intorno. Questa tecnica non produce picchi di rumore, elimina il rumore impulsivo molto bene (rumore sale e pepe), non sporca eccessivamente gli edge delle immagini e può essere implementata in modo iterativo.
+	
+	Il grosso svantaggio del median smoothing è che un intorno rettangolare rovina linee sottili e angoli acuti nell'immagine, per evitare ciò si ricorre ad un intorno di forma differente
+\end{itemize}

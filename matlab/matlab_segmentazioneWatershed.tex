@@ -1,0 +1,75 @@
+\chapter{Segmentazione Watershed in Matlab}
+La trasformata watersher è calcolata dalla funzione $watershed$, la cui sintassi è la seguente:
+$$
+L = watershed(f)
+$$
+
+dove $L$ è una etichetta di matrice con interi positivi che corrispondo ai bacini e con i valori zero usati per indicare le creste watershed.
+
+Uno strumento comunemente utilizzato con la trasformata watershed per la segmentazione è la \textbf{trasformata della distanza}.
+
+La trasformate della distanza di una immagine binaria è la distanza da ogni pixel dal pixel più vicino di valore diverso da zero.
+
+La trasformata della distanza può essere calcolata usando la funzione $bwdist$, la cui sintassi è:
+$$
+D = bwdist(f)
+$$
+
+\section{Segmentazione di una immagine binaria}
+\begin{lstlisting}
+f = imread('binary-dowel-image.tif');
+figure, imshow(f), title('Binary image');
+
+fc = ~f ;
+figure, imshow(fc), title('Complement image');
+
+D = bwdist(fc);
+figure, imshow(imadjust(uint16(D))), title('Distance transform');
+
+L = watershed(-D);
+w = L==0;
+figure, imshow(w)
+title('Watershed lines of the negative of the distance transform');
+
+g2 = f & ~w ;
+figure, imshow(g2)
+title('Watershed lines superimposed in black over original binary image');
+\end{lstlisting}
+
+\section{Segmentazione di una immagine in toni di grigio}
+\begin{lstlisting}
+f = imread('small-blobs.tif');
+figure, imshow(f), title('Original image');
+
+h = fspecial('sobel');
+fd = double(f);
+g = sqrt(imfilter(fd, h, 'replicate').^2 + imfilter(fd, h, 'replicate').^2);
+figure, imshow(imadjust(uint16(g))), title('Gradient image');
+
+L = watershed(g);
+wr = L==0;
+figure, imshow(wr), title('Watershed segmentation');
+
+g2 = imclose(imopen(g, ones(3,3)), ones(3,3));
+L2 = watershed(g2);
+wr2 = L2==0;
+f2=f;
+f2(wr2)=255;
+figure, imshow(f2)
+title('Watershed segmentation on smoothed image');
+\end{lstlisting}
+
+\section{Segmentazione usando i marcatori}
+Per controllare la sovra-segmentazione si utilizzano i marker (marcatori) interni ed esterni.
+
+La funzione IPT $imregionalmin$ calcola la posizione di tutti i minimi locali in una immagine. La sintassi è la seguente:
+$$
+rm = imregionalmin(f)
+$$
+
+dove $f$ è l'immagine in toni di grigio e $rm$ è una immagine binaria in cui i pixel in primo piano marcano le posizioni del minimo locale; questi ultimi possono rappresentare dettagli irrilevanti.
+
+Per eliminare i minimi estranei si utilizza la funzione IPT $imextendedmin$ che calcola l'insieme di punti "bassi" nell'immagine that are deeper than their immediatesurroundings (by a certain height threshold). 
+
+Fornendo sia i marcatori interni che esterni, è possibile modificare l'immagine del gradiente usando una procedura chiamata \textbf{minima imposition}. Questa tecnica modifica una immagine in toni di grigio in modo che i minimi locali si verificano solo nelle posizioni marcate. Altri calori dei pixel sono spinti verso l'alto per rimuovere tutti gli altri minimi locali
+

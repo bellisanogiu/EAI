@@ -1,0 +1,143 @@
+\chapter{Morfologia Matematica con Matlab}
+
+\section{Introduzione}
+Nel contesto dell'image processing l'MM è uno strumento che permette di:
+
+\begin{itemize}
+	\item estrarre dall'immagine componenti utili alla rappresentazione e descrizione delle regioni come contorni, scheletri e superfici convessi
+	
+	\item attuare tecniche particolari come filtri morfologici, thinning e prunning
+\end{itemize}
+
+Gli operatori morfologici sono basati sugli \textbf{elementi strutturali} (SE)
+
+\begin{itemize}
+	\item gli SE sono piccoli insiemi o sottoimmagini usati per sondare un'immagine per studiarne le proprietà di interesse
+	
+	\item gli SE, quando lavorano con le immagini sono definiti come array rettangolari
+\end{itemize}
+
+\section{Le funzioni MM}
+
+\subsection{strel}
+Questa funzione permette di definire gli SE basandosi su diverse forme e dimensioni. La sintassi è:
+
+\begin{lstlisting}
+se = strel(shape, parameters)
+\end{lstlisting}
+
+\begin{itemize}
+	\item \textbf{shape} è una stringa che specifica la forma
+	\item \textbf{parameters} è una lista di parametri basati sulla forma scelta, come per esempio la dimensione
+\end{itemize}
+
+\subsection{imdilate}
+Questa funzione permette la dilatazione secondo la sintassi:
+
+\begin{lstlisting}
+IM2 = imdilate(IM, SE)
+\end{lstlisting}
+
+\begin{itemize}
+	\item \textbf{IM2} è l'immagine in output
+	\item \textbf{IM} è l'immagine in input (scala di grigio, binaria)
+	\item \textbf{SE} è l'elemento strutturante, o un array di elementi strutturanti restituiti dalla funzione $strel$
+\end{itemize}
+
+\subsection{imerode}
+Permette l'erosione:
+
+\begin{lstlisting}
+IM2 = imerode(IM,SE)
+\end{lstlisting}
+
+\begin{itemize}
+	\item \textbf{IM2} è l'immagine in output
+	\item \textbf{IM} è l'immagine in input (scala di grigio, binaria)
+	\item \textbf{SE} è l'elemento strutturante, o un array di elementi strutturanti restituiti dalla funzione $strel$
+\end{itemize}
+
+\subsection{imopen}
+Questa funzione permette l'opening:
+
+\begin{lstlisting}
+IM2 = imopen(IM,SE)
+\end{lstlisting}
+
+\subsection{imclose}
+Questa funzione permette il closing:
+
+\begin{lstlisting}
+IM2 = imclose(IM,SE)
+\end{lstlisting}
+
+\subsection{bwhitmiss}
+Si tratta della funzione con cui si implementa la trasformazione Hit-or-Miss in base alla sintassi:
+
+\begin{lstlisting}
+BW2 = bwhitmiss(BW,SE1,SE2)
+\end{lstlisting}
+
+\begin{itemize}
+	\item SE1, SE2 sono gli elementi strutturanti
+	\item l'operazione Hit-or-Miss preserva i pixel i cui vicini corrispondono alla forma di SE1 e non corrispondono alla forma di SE2
+	\item SE1 e SE2 possono essere elementi strutturanti piatti restituiti dalla funzione $strel$ o possono essere array vicini
+	
+	\item Il dominio di SE1 e SE2 non dovrebbe avere elementi in comune, ovvero:
+	
+	\begin{lstlisting}
+	BW2 = bwhitmiss(BW,SE1,SE2)
+	\end{lstlisting}
+	
+	è equivalente a:
+	
+	\begin{lstlisting}
+	imerode(BW,SE1)
+	\end{lstlisting}
+	
+	e
+	
+	\begin{lstlisting}
+	imerode(~BW,SE2)
+	\end{lstlisting}
+	
+\end{itemize}
+
+\subsection{imfill}
+Questa funzione è utilizzata per permettere la copertura di buchi in una immagine binaria, tenendo conto che per buco si intende un insieme di punti dello sfondo che non possono essere raggiunti dal confine dell'immagine. La sintassi è la seguente:
+
+\begin{lstlisting}
+BW2 = imfill(BW1,'holes')
+\end{lstlisting}
+
+\subsection{bwlabel}
+Questa funzione permette di etichettare le componenti connesse in una immagine binaria 2D secondo la sintassi:
+
+\begin{lstlisting}
+L = bwlabel(BW,N)
+\end{lstlisting}
+
+\begin{itemize}
+	\item L è la matrice restituita, della stessa dimensione di BW che contiene l'etichetta per le componenti connesse in BW
+	
+	\item N può assumere il valore di 4 o 8 corrispondente a oggetti 4-connessi o 8-connessi. Se l'argomento è omesso, il valore di default sarà 8
+	
+	\item L è un intero che è uguale o maggiore di 0:
+	\begin{itemize}
+		\item i pixel etichettati con 0 riguardano lo sfondo
+		
+		\item i pixel etichettati con 1 indicano un oggetto
+		
+		\item i pixel etichettati con 2 indicano il secondo oggetto e così via
+	\end{itemize} 
+\end{itemize}
+
+Una seconda sintassi è la seguente:
+
+\begin{lstlisting}
+[L, NUM] = bwlabel(BW,N)
+\end{lstlisting}
+
+\begin{itemize}
+	\item restituisce in NUM il numero di oggetti connessi trovati in BW
+\end{itemize}

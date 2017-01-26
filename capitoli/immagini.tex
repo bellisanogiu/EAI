@@ -1,0 +1,261 @@
+\chapter{Immagini}
+
+\section{Image processing, analysis e understanding. Spiegarne la differenza}
+
+Abbiamo tre categorie principali di manipolazione delle immagini:
+\begin{itemize}
+\item \textbf{image processing} (input: immagine -> output: immagine);
+\item \textbf{image analysis} (input: immagine -> output: metriche);
+\item \textbf{image understanding} (input: immagine -> output: descrizione ad alto livello)
+\end{itemize}
+
+Nell'\textbf{image processing} l'input della manipolazione è un'immagine e l'output è ancora un'immagine e più precisamente si tratta dell'immagine originale opportunamente processata (grazie a tecniche di miglioramento e rimozione del rumore)
+
+Nell'\textbf{image analysis} è la trasformazione che fa passare dall’immagine a una sua rappresentazione astratta, cioè ad una sua descrizione ad alto livello
+
+Nell'\textbf{image understanding} data un'immagine otteniamo invece descrizioni di alto livello sul contenuto dell'immagine (ad esempio il riconoscimento degli oggetti all'interno delle immagini e le relazioni tra di essi).
+
+\section{Definire una immagine digitale}
+Un'immagine digitale è una rappresentazione numerica/digitale di un'immagine attraverso una matrice rettangolare, in cui ad ogni posizione (che prende il nome di pixel) sono assegnati uno o più valori numerici e ad ogni posizione corrisponde una coordinata reale sul piano immagine. 
+
+\subsection{Dettagli}
+Perché le immagini siano elaborate al computer occorre trasformarle in una rappresentazione numerica/digitale attraverso un processo chiamato digitalizzazione. 
+
+Le immagini digitali sono matrici rettangolari in cui ad ogni posizione corrispondono uno o più valori numerici: ad ogni posizione corrisponde una coordinata reale sul piano immagine; ogni punto prende il nome di pixel (picture per element).
+
+Un immagine digitale f[m,n] descritta in uno spazio discreto 2D è derivata da un immagine analogica f(x,y) in uno spazio continuo 2D attraverso il processo di campionamento (sampling) detto digitalizzazione. L'immagine continua in 2D f(x,y) viene divisa in N righe ed M colonne.
+
+L'intersezione di una riga con una colonna determina un pixel. Il valore assegnato alle coordinate intere [m,n] con {m = O, 1, 2,..., M-1} e {n = O, 1, 2,..., N-1} è f[m,n]. e rappresenta l'intensità di grigio associata al punto identificato. Il numero dei valori di grigi generalmente è una potenza di 2: L=2 B (se B>1 si parla di immagine in scala di grigi, se B=1 si parla di immagini binarie).
+
+Quando un'immagine viene digitalizzata il sampling avviene sia a livello spaziale (con le righe e le colonne) sia a livello di ampiezza (con la quantizzazione dei livelli di grigio).
+
+\section{Cosa si intende per risoluzione di una immagine?}
+La risoluzione è un indice della qualità di un'immagine. E' la quantità dei suoi punti elementari (pixel) rapportata ad un'unità di lunghezza, dove quest'ultima di solito è il pollice (dpi, dot per inch).
+
+\subsection{Dettagli}
+Possiamo distinguere due tipi di risoluzione: spaziale e dei livelli d'intensità.
+\begin{itemize}
+
+\item \textbf{La risoluzione spaziale} indica il più piccolo dettaglio distinguibile nell'immagine. È quindi una misura della densità dei pixel di un'immagine (che si misura in punti per unità di lunghezza, che solitamente è il pollice).
+
+Poiché un'immagine digitale è discreta ed è rappresentata come un insieme di punti, se il numero di punti per unità di lunghezza è molto elevato, allora ogni pixel rappresenta dettagli più piccoli e quindi aumentando il numero di pixel aumento il dettaglio percepito dall'occhio umano.
+
+La risoluzione spaziale è quindi strettamente dipendente dalla frequenza di campionamento dell'immagine digitale.
+
+\item \textbf{La risoluzione dei livelli d'intensità}, in modo simile,  consiste nel più piccolo cambiamento del livello d'intensità distinguibile nell'immagine. Anche in questo caso se l'immagine presenta un elevato numero di livelli d'intensità differenti, allora la risoluzione sarà maggiore, in quanto non verrà percepito il passaggio da un livello all'altro. La risoluzione dei livelli d'intensità è quindi legata alla frequenza di campionamento in ampiezza (quantizzazione dei livelli d'intensità) dell'immagine.
+
+La quantizzazione (campionamento in ampiezza) può essere uniforme, ovvero le intensità degli oggetti sono mappate in modo diretto sui livelli di grigio dell'immagine, oppure può essere logaritmica (maggior risoluzione nelle zone scure). L'occhio umano ha una percezione logaritmica dei livelli di grigio.
+
+La scelta del campionamento viene fatta in base all'uso dell'immagine, alle limitazioni della memoria e della velocità dell'elaborazione, alla necessità o meno di analizzare l'immagine e alle informazioni che bisogna estrarne.
+\end{itemize}
+
+\section{Illustrare il processo di campionamento e quantizzazione}
+La digitalizzazione di un'immagine comprende il campionamento e la quantizzazione. Sono entrambi processi di discretizzazione. Il campionamento consiste nella discretizzazione del dominio spaziale e in genere è uniforme, mentre la quantizzazione consiste nella discretizzazione dei livelli di grigio e può essere sia uniforme che logaritmica.
+
+\subsection{Dettagli}
+Quando un immagine viene digitalizzata, il campionamento (sampling) avviene sia a livello spaziale (con le righe e le colonne) sia a livello di ampiezza (con la quantizzazione dei livelli di grigio).
+
+Per campionare un'immagine è necessario scegliere innanzitutto quanti pixel vogliamo rappresentare (campionamento spaziale), scegliendo quindi il numero di righe e di colonne della matrice che rappresenterà l'immagine. Da questa scelta dipenderà ovviamente la risoluzione dell'immagine digitalizzata.
+
+\begin{itemize}
+\item Il sampling spaziale può essere uniforme, ovvero il campionamento ha la stessa frequenza su tutta l'immagine, oppure adattivo ovvero si utilizza maggiore frequenza nelle aree con più dettaglio. Il valore discreto frutto del sampling si chiama pixel (picture element) nello spazio 2D e voxel (volume element) nello spazio 3D.
+
+\item La risoluzione indica il più piccolo dettaglio ottenibile dall'immagine. La frequenza di campionamento limita la risoluzione.
+La quantizzazione dei livelli di luminosità dei pixel (ossia il campionamento in ampiezza) consiste invece nel decidere il numero di valori di intensità rappresentabili per ogni pixel (che solitamente è una potenza di 2).
+
+\item La quantizzazione (campionamento in ampiezza) può essere uniforme, ovvero le intensità degli oggetti sono mappate in modo diretto sui livelli di grigio dell'immagine, oppure può essere logaritmica (maggior risoluzione nelle zone scure). L'occhio umano ha una percezione logaritmica dei livelli di grigio.
+La scelta del campionamento viene fatta in base all'uso dell'immagine, alle limitazioni della memoria e della velocità dell'elaborazione, alla necessità o meno di analizzare l'immagine e alle informazioni che bisogna estrarne.
+
+\item Le immagini a colori contengono maggiori informazioni di quelle monocromatiche. L'uomo rileva i colori come una combinazione dei tre colori primari: rosso, verde e blu. Il computer usa quindi il modello RGB in cui un pixel può essere associato ad un vettore tridimensionale che fornisce le
+rispettive intensità dei tre colori; abbiamo quindi ad esempio: nero= (O,O,O); bianco=(k-1,k-1,k-1); rosso puro=(k-1,O,O) dove k è il range di intensità possibile (quindi i colori rappresentabili col modello RGB sono $k^3$).
+
+Un altro modo per rappresentare le immagini a colori è il modello HSL (hue = tonalità, saturation = saturazione, lightness = luminosità) simile al modello RGB nel funzionamento.
+\end{itemize}
+
+\section{Descrivere i passi fondamentali di un processo di elaborazione di immagini digitali}
+I passi fondamentali di un processo di elaborazione di immagini digitali sono quattro:
+\begin{itemize}
+
+\item \textbf{Acquisizione dell'immagine}: consiste nella digitalizzazione dell'immagine da elaborare, ossia il processo di campionamento con cui si cerca di derivare da un'immagine reale, definita nello spazio continuo, un'immagine discreta, rappresentabile come matrice. In questa fase avviene quindi la scelta del campionamento spaziale e in ampiezza da cui dipende la risoluzione dell'immagine.
+
+\item \textbf{Preprocessing}: comprende tutte quelle operazioni di basso livello che si eseguono sulle immagini. Lo scopo è quello di enfatizzare una certa caratteristica allo scopo di rendere più adatta l'immagine a computazioni future di livello più alto. Esempi tipici sono il miglioramento del contrasto, lo smoothing, correzione di distorsioni, eliminazione del rumore.
+
+\item \textbf{Segmentazione}: consiste nella suddivisione di un'immagine in modo da identificare ed isolare gli oggetti che compaiono nell'immagine stessa. È uno degli aspetti più complicati del processo di elaborazione delle immagini digitali.
+
+\item \textbf{Descrizione e classificazione degli oggetti ottenuti dalla segmentazione}: con metodi ad alto livello si possono ricavare informazioni e modelli (image
+understanding, visione) e a trovare le relazioni tra di essi (ad esempio la posizione di un oggetto rispetto ad un altro).
+\end{itemize}
+
+\section{Dettagli}
+L'elaborazione di immagini digitali è una disciplina che definisce tecniche e algoritmi informatici per modificare immagini digitali allo scopo di: migliorarne la qualità (riduzione del rumore o aumento del contrasto); generare codifica utile, compressione; generare visualizzazioni (grafica computazionale); estrarre semplici features; ricavare informazioni/modelli (image understanding, visione).
+
+La Computer Vision mira a riprodurre l'effetto della vista umana utilizzando la percezione elettronica di un'immagine e la sua successiva comprensione. Possiamo distinguere due livelli: High Level Image Understanding e Low Level Image Processing.
+\begin{itemize}
+	\item il processing di basso livello utilizza poche informazioni riguardo il contenuto dell'immagine
+	\item il processing di alto livello fa l'esatto opposto: utilizza tali informazioni per cercare di simulare le capacità cognitive umane e la nostra abilità nel prendere decisioni in base a ciò che l'immagine rappresenta. Per fare questo spesso nel processing di alto livello si ricorre a tecniche tipiche dell'intelligenza artificiale.
+\end{itemize}
+
+La vista umana non dà un'immagine fedele del mondo esterno ma ne dà un'interpretazione spesso fallace. Questo perché il cervello umano tende ad associare le informazioni in insiemi correlati sulla base di: raggruppamento, somiglianza, continuità, chiusura, figura/sfondo, profondità, costanza forme in prospettiva e moto.
+La visione umana è un processo di interpretazione molto complesso, ma in qualche modo computazionale. Si basa su informazioni a priori, innate ed acquisite. Difficilmente imitabile da un sistema artificiale. Sono imitabili però alcune idee e procedure. Il computer invece misura valori assoluti, esegue calcoli ed è: instancabile, economico, veloce e oggettivo.
+
+\chapter{Concetti base sulle immagini digitali}
+
+\section{Come si classificano le operazioni spaziali da applicare su un'immagine digitale?}
+I tipi di operazioni che possono essere applicati ad immagini digitali per trasformare un'immagine input $a[M,N]$ in un'immagine output $b[M,N]$ (o altre rappresentazioni) possono essere classificate in tre categorie:
+\begin{itemize}
+
+\item \textbf{Puntuali}: il valore di output ad una specifica coordinata dipende solo dal valore in input alla medesima coordinata. La complessità associata a questo tipo di operazioni è costante
+
+\item \textbf{Locali}: il valore di output ad una specifica coordinata dipende non solo dall'input del valore alla medesima coordinata ma anche da un suo intorno. La complessità è quadratica sulle dimensioni dell'intorno scelto
+
+\item \textbf{Globali}: il valore di output ad una specifica coordinata dipende da tutti i valori dell'immagine input. La complessità è quadratica sulle dimensioni dell'immagine stessa
+\end{itemize}
+
+\section{Definire il concetto di adiacenza nelle immagini digitali}
+L'adiacenza è quella relazione fra due pixel di un'immagine digitale per cui la loro distanza è uguale a 1. 
+\begin{itemize}
+
+	\item \textbf{City Block}
+	La distanza City Block da un dato pixel è dato da tutti quei pixel che hanno distanza 1 (dal suddetto pixel) compiendo un solo passo in verticale o in orizzontale
+(4-adiacenza)
+
+	\item \textbf{Scacchiera (Chessboard)}
+	La distanza Scacchiera (Chessboard da un dato pixel è dato da tutti quei pixel che hanno distanza 1 (dal suddetto pixel) compiendo un solo passo in verticale, in orizzontale o anche in diagonale (8-adiacenza)
+\end{itemize}
+
+\section{Definire una regione di un'immagine binaria}
+Una regione è un insieme connesso di pixel in cui esiste un percorso fra ogni coppia di questi pixel. Questo percorso è tracciato saltando sempre da un pixel al pixel adiacente, e ciascuno di questi pixel appartiene alla regione.
+Una regione può avere buchi al suo interno.
+
+\section{Definire un contorno in un'immagine binaria}
+\begin{itemize}
+	\item il bordo interno è l'insieme dei pixel di una regione che hanno almeno un pixel adiacente non	appartenente alla regione
+	\item il bordo esterno è invece costituito dai pixel esterni alla regione che hanno almeno un pixel adiacente appartenente alla regione
+\end{itemize}
+
+\section{Definire un edge in un'immagine digitale}
+Formalmente l'edge è una proprietà di un pixel e del suo intorno. In un'immagine digitale, è detto "di edge" un pixel nel cui intorno sono presenti dei pixel con livelli di grigio che variano bruscamente.
+
+\section{Illustrare il concetto di distanza tra punti in una immagine digitale}
+La distanza tra punti di coordinate (i, j) e (h, k) può essere definita come distanza:
+\begin{itemize}
+	\item \textbf{Euclidea} $D_e[(i,j), (h,k)] = \sqrt{(i - h)^2 + (j - k)^2}$ 
+	
+	\item \textbf{City Block} $D_4[(i,j), (h,k)] = |i - h| + |j - k|$
+	La distanza City Block da un dato pixel è dato da tutti quei pixel che hanno distanza 1 (dal suddetto pixel) compiendo un solo passo in verticale o in orizzontale
+	
+	\item \textbf{Scacchiera (Chessboard)} $D_8[(i,j), (h,k)] = max\{|i - h|, |j - k| \}$
+	La distanza Scacchiera (Chessboard da un dato pixel è dato da tutti quei pixel che hanno distanza 1 (dal suddetto pixel) compiendo un solo passo in verticale, in orizzontale o anche in diagonale
+\end{itemize}
+
+\section{Fornire la definizione di istogramma di un'immagine}
+L'istogramma di un'immagine digitale $f[m,n]$ è una funzione che a ciascun livello di grigio definito nella quantizzazione dell'immagine, fa corrispondere un valore pari al numero di pixel dell'immagine a cui è assegnato quel livello di grigio.
+$$
+H(k) = card \{ f(x,y) | f(x,y) = k \}
+$$ 
+
+con $k = 0, 1, \dots, 2^{B}-1$ 
+
+per cui vale: 
+$$ 
+\displaystyle\sum_{k=0}^{{2^B}-1} H(k) = M \cdotp N
+$$
+
+dove $card = \#$
+
+\subsection{Dettagli}
+Le immagini a colori hanno tre istogrammi: uno per ogni componente. 
+
+Ecco un esempio di istogramma per un'immagine monocromatica 4x4 a 3 bit:
+$$
+\begin{array}{c|c|c|c}
+	6 & 7 & 3 & 3 \\ 
+	\hline
+	2 & 6 & 1 & 0 \\
+	\hline
+	4 & 6 & 1 & 0 \\
+	\hline
+	6 & 6 & 6 & 0 \\
+\end{array}
+$$
+L'istogramma è quindi: $H(k), k = 0, \dots, 7 \quad [4 \, 2 \, 1 \, 1 \, 1 \, 0 \, 6 \, 1]$
+
+Possiamo definire l'algoritmo di creazione dell'istogramma:
+\begin{itemize}
+\item Assegna zero a tutti gli elementi dell'array H;
+
+\item Per ogni pixel (x,y) dell'immagine f, incrementa H(f(x,y)) di 1.
+\end{itemize}
+
+L'istogramma può avere molti punti di minimo e massimo locale, il problema può essere risolto attraverso un operazione di smoothing. L'istogramma H' a cui è stato applicato uno smoothing in un k intorno quadrato di lato k è definito come:
+
+$$
+H'(z) = \frac{1}{2k+1} \sum_{i=-k}^{k} H(z+i)
+$$
+
+\section{Illustrare le strutture dati tradizionali per rappresentare un'immagine}
+Ci sono due tipi di strutture dati tradizionali: le matrici e le catene.
+\begin{itemize}
+
+\item \textbf{Le matrici (array 2D)} sono il tipo di struttura dati più usato per la rappresentazione a basso livello di un'immagine
+\begin{itemize}
+	\item le immagini binarie sono rappresentate come matrici binarie
+	\item le immagini monocramatiche sono rappresentate come immagini d'intensità
+	\item le immagini a colori sono rappresentate come tre immagini (RGB o HSI)
+\end{itemize}
+
+Gli elementi delle matrici sono numeri interi. Le caratteristiche spaziali sono ottenibili in modo implicito. I dati delle immagini di questo tipo sono ottenuti generalmente come output diretto del dispositivo di cattura dell'immagine come ad esempio lo scanner.
+
+\item Le \textbf{chain} vengono utilizzate per le immagini binarie. Per fare questo si sceglie un punto del bordo a partire dal quale si indicano i passi discreti da eseguire in serie. Ad ogni direzione è associata un etichetta. Vediamo due tipi di catene:
+
+\begin{itemize}
+\item \textbf{Codifica di Freeman}: si utlizza per rappresentare i bordi all'interno delle immagini; si parte generalmente dal punto più in alto a sinistra del contorno e lo si percorre utilizzando spostamenti secondo 8 direzioni prestabilite (a cui sono assegnati i valori da O a 7). In ogni punto vengono provate le 8 direzioni per trovare i pixel adiacenti tra loro che definiscono il contorno. Alla fine il codice di contorno sarà costituito dalla lista delle direzioni usate in successione per individuare i punti di contorno.
+
+\item \textbf{Run Length Coding}: sono spesso utilizzate per rappresentare le aree all'interno degli oggetti, e le stringhe di simboli su matrici (i fax funzionano così ad esempio). La rappresentazione consiste in una serie di liste in cui ogni riga rappresenta una sottolista. Il primo elemento di ogni sottoriga indica l'indice della riga stessa, i restanti elementi vanno esaminati in coppie e rappresentano la colonna iniziale e la colonna finale di una sequenza. In questo modo vengono identificati pixel adiacenti appartenenti allo stesso oggetto riga per riga.
+\end{itemize}
+\end{itemize}
+
+\section{Illustrare le strutture dati topologiche per rappresentare un'immagine}
+Le strutture dati di tipo topologico descrivono un'immagine come un insieme di elementi e le relazioni tra di essi. Relazioni come ad esempio "la regione 5 è adiacente alla regione 12" oppure "l'immagine dell'uomo è vicino all'immagine dell'albero" sono spesso rappresentate come grafi.
+Ecco un esempio:
+
+Inoltre abbiamo anche dei database relazionali in cui tutte le informazioni sono concentrate in relazioni tra parti semanticamente importanti dell'immagine, ossia oggetti risultanti dalla segmentazione dell'immagine. Queste sono utili per la comprensione ad alto livello delle immagini.
+Ecco un esempio:
+
+\section{Illustrare le strutture dati topologiche per rappresentare un'immagine}
+Le strutture dati topologiche permettono di descrivere le relazioni tra gli oggetti all'interno di un'immagine, solitamente una volta che l'immagine è stata segmentata. I grafi di adiacenza hanno dei nodi corrispondenti agli oggetti dell'immagine, collegati da un lato se esiste una relazione di adiacenza o inclusione tra di essi. Con i database relazionali si possono assegnare delle chiavi ai vari oggetti definendo per ciascuno di essi una serie di attributi e indicando con opportune relazioni le adiacenze e le inclusioni. In questo modo l'immagine può essere trattata come un database e si possono eseguire delle query.
+
+\section{Illustrare le strutture dati gerarchiche per rappresentare un’immagine}
+Le strutture dati gerarchiche per la memorizzazione di immagini sono concepite allo scopo di rendere la computazione più leggera. L'immagine viene resa a diversi livelli di risoluzione, lavorando alla risoluzione massima solo nelle parti dell'immagine in cui ciò è necessario. Strutture dati di questo tipo sono le M-Piramidi e le T-piramidi.
+\begin{itemize}
+	\item le M-piramidi (piramidi di matrici) consistono in una sequenza di matrici ordinate per risoluzione decrescente La prima matrice è l'immagine originale alla risoluzione	massima. Le matrici successive rappresentano l'immagine via via dimezzata (occupando quindi 1/4	dello spazio)e consentono quindi di lavorare con un'immagine scegliendo la risoluzione più opportuna. Vengono quindi generate le matrici a tutti i livelli di risoluzione fino ad arrivare a una	matrice di dimensione 1x1. Per determinare i valori dei pixel della matrice $M(i)$ si utilizza solitamente la media o il valore massimo dei 4 pixel corrispondenti nella matrice $M(i-1)$
+	
+	\item le T-piramidi è un modo alternativo rispetto alle M-Pyramid e si basa sull'utilizzo degli alberi. Ogni nodo ha sempre 4 figli. Le foglie corrispondono al singolo pixel, proprio come i QuadTree che sono una loro specializzazione
+	
+	\item il Quad tree è sempre un albero ma rispetto alla T-pyramid ogni nodo può avere o 4 figli, quando	una regione è non omogenea, oppure nessun figlio se una regione è omogenea. E' una struttura dati vantaggiosa nel caso in cui l'immagine abbia grosse regioni omogenee. Il vantaggio è quindi il risparmio di memoria ma piccole variazioni da un'immagine all'altra possono comportare grandi differenze tra i rispettivi quad tree rendendo quindi difficile valutare la similarità fra immagini
+\end{itemize}
+
+Problemi legati alle strutture dati gerarchiche sono:
+\begin{itemize}
+	\item Dipendenza dalla posizione, orientamento e dimensione degli oggetti
+	
+	\item Due immagini simili possono avere rappresentazione molto diverse
+\end{itemize}
+
+\subsection{Dettagli}
+La computer vision è molto costosa dal punto di vista computazionale, anche solo a causa della gran quantità di dati da processare. Una soluzione può essere quella di utilizzare il calcolo parallelo (metodo della forza bruta), tuttavia molti problemi legati alla computer vision sono difficili da suddividere tra i processori. Le strutture dati gerarchiche permettono invece di realizzare algoritmi che devono avere a che fare con una quantità di dati inferiore.
+
+\section{Quali sono le proprietà topologiche delle immagini?}
+Sono invarianti rispetto alle rubber sheet(foglio) transformations; ad esempio allungando l'immagine non cambia la continuità delle sue parti e non cambia il numero dei buchi al suo interno.
+La caratteristica di Eulero-Poincare è definita come la differenza tra il numero di regioni ed il numero di buchi in esse.
+L'\textbf{insieme convesso} è una regione di punti dei quali prendendone due qualsiasi il segmento che li unisce è del tutto compreso nell'insieme.
+Il \textbf{guscio convesso} è invece la più piccola regione convessa che racchiude un insieme di punti.
+
+\section{Strutture dati di supporto (matrici - grafi di adiacenza - chains - grafi - DB relazionali)}
+L'organizzazione dei dati può condizionare sensibilmente la scelta e la semplicità dell'algoritmo. Le immagini possono essere a vari livelli di rappresentazione:
+\begin{itemize}
+	\item Iconic images: consistono in immagini che contengono i dati originali (matrice di interi con informazioni sulla luminosità del pixel)
+	\item Immagini segmentate: parti delle immagini riunite i gruppi che probabilmente appartengono allo stesso oggetto;
+	\item Rappresentazioni geometriche: forme geometriche 2D e 3D
+	\item Modelli relazionali: per trattare i dati in modo più efficiente e ad un livello di astrazione più alto (es. posizione degli oggetti, relazioni tra di essi, ricerca di oggetti)
+\end{itemize}

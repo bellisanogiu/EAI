@@ -1,44 +1,173 @@
 \select@language {italian}
 \select@language {italian}
-\contentsline {chapter}{\numberline {1}Image segmentation}{3}{chapter.1}
-\contentsline {section}{\numberline {1.1}Cosa \IeC {\`e} l'image segmentation?}{3}{section.1.1}
-\contentsline {section}{\numberline {1.2}Quanti tipi di segmentazione abbiamo?}{3}{section.1.2}
-\contentsline {section}{\numberline {1.3}In quali campi viene utilizzata la segmentazione?}{3}{section.1.3}
-\contentsline {section}{\numberline {1.4}Quali sono i metodi utilizzati per la segmentazione?}{4}{section.1.4}
-\contentsline {section}{\numberline {1.5}Cosa si intende con Approccio Globale: Gray level thresholding?}{4}{section.1.5}
-\contentsline {section}{\numberline {1.6}Quale \IeC {\`e} l'idea alla base del gray level thresholding con due elementi (mode) da separare?}{4}{section.1.6}
-\contentsline {section}{\numberline {1.7}Quale \IeC {\`e} l'idea alla base del gray level thresholding con tre elementi (mode) da separare?}{5}{section.1.7}
-\contentsline {section}{\numberline {1.8}Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}{5}{section.1.8}
-\contentsline {section}{\numberline {1.9}Il thresholding applicato ad immagini con rumore e variazioni di luminosit\IeC {\`a}: cosa cambia?}{5}{section.1.9}
-\contentsline {section}{\numberline {1.10}Cosa \IeC {\`e} il single global threshold e quando si applica?}{6}{section.1.10}
-\contentsline {section}{\numberline {1.11}Quali sono le caratteristiche del single global threshold?}{6}{section.1.11}
-\contentsline {section}{\numberline {1.12}Qual \IeC {\`e} l'algoritmo Matlab per il global thresholding?}{6}{section.1.12}
-\contentsline {section}{\numberline {1.13}Cosa \IeC {\`e} l'Optimum global thresholding o metodo Otsu?}{7}{section.1.13}
-\contentsline {section}{\numberline {1.14}Come funziona il metodo Otsu?}{7}{section.1.14}
-\contentsline {section}{\numberline {1.15}Spiegare le sogliature multiple}{9}{section.1.15}
-\contentsline {section}{\numberline {1.16}Illustra il metodo Otsu in Matlab}{10}{section.1.16}
-\contentsline {section}{\numberline {1.17}Tecniche per migliorare il global thresholding}{10}{section.1.17}
-\contentsline {chapter}{\numberline {2}Segmentazione}{11}{chapter.2}
-\contentsline {section}{\numberline {2.1}Formulazione matematiche di base}{11}{section.2.1}
-\contentsline {section}{\numberline {2.2}Region growing}{11}{section.2.2}
-\contentsline {section}{\numberline {2.3}Qual \IeC {\`e} l'algoritmo di un region growing?}{12}{section.2.3}
-\contentsline {section}{\numberline {2.4}Region Splitting and Merging}{12}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}Definizione}{12}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Region Splitting and Merging: algoritmo}{12}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}Region Splitting and Merging: tecniche di rappresentazione}{13}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}Caratteristiche}{13}{subsection.2.4.4}
-\contentsline {subsection}{\numberline {2.4.5}Algoritmo per lo splitting and merging}{13}{subsection.2.4.5}
-\contentsline {subsection}{\numberline {2.4.6}Region growing Matlab}{13}{subsection.2.4.6}
-\contentsline {subsection}{\numberline {2.4.7}Region growing Matlab: le funzioni}{14}{subsection.2.4.7}
-\contentsline {subsection}{\numberline {2.4.8}Region Splittin and Merging in Matlab: splitmerge}{15}{subsection.2.4.8}
-\contentsline {subsection}{\numberline {2.4.9}Region Splitting and Merging in Matlab: split test}{16}{subsection.2.4.9}
-\contentsline {chapter}{\numberline {3}Image processing con Matlab}{17}{chapter.3}
-\contentsline {section}{\numberline {3.1}Ridimensionamento}{17}{section.3.1}
-\contentsline {section}{\numberline {3.2}Trasformazioni geometriche}{17}{section.3.2}
-\contentsline {section}{\numberline {3.3}Rumore}{18}{section.3.3}
-\contentsline {section}{\numberline {3.4}Smoothing con thresholding}{18}{section.3.4}
-\contentsline {chapter}{\numberline {4}Morfologia}{19}{chapter.4}
-\contentsline {section}{\numberline {4.1}Introduzione}{19}{section.4.1}
-\contentsline {subsection}{\numberline {4.1.1}Campi di utilizzo della morfologia matematica}{19}{subsection.4.1.1}
-\contentsline {subsection}{\numberline {4.1.2}Il linguaggio della morfologia matematica}{20}{subsection.4.1.2}
-\contentsline {subsection}{\numberline {4.1.3}Altri concetti della teoria degli insiemi}{20}{subsection.4.1.3}
+\contentsline {chapter}{\numberline {1}Immagini}{6}{chapter.1}
+\contentsline {section}{\numberline {1.1}Image processing, analysis e understanding. Spiegarne la differenza}{6}{section.1.1}
+\contentsline {section}{\numberline {1.2}Definire una immagine digitale}{6}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Dettagli}{6}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}Cosa si intende per risoluzione di una immagine?}{7}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Dettagli}{7}{subsection.1.3.1}
+\contentsline {section}{\numberline {1.4}Illustrare il processo di campionamento e quantizzazione}{8}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Dettagli}{8}{subsection.1.4.1}
+\contentsline {section}{\numberline {1.5}Descrivere i passi fondamentali di un processo di elaborazione di immagini digitali}{9}{section.1.5}
+\contentsline {section}{\numberline {1.6}Dettagli}{9}{section.1.6}
+\contentsline {chapter}{\numberline {2}Concetti base sulle immagini digitali}{11}{chapter.2}
+\contentsline {section}{\numberline {2.1}Come si classificano le operazioni spaziali da applicare su un'immagine digitale?}{11}{section.2.1}
+\contentsline {section}{\numberline {2.2}Definire il concetto di adiacenza nelle immagini digitali}{11}{section.2.2}
+\contentsline {section}{\numberline {2.3}Definire una regione di un'immagine binaria}{12}{section.2.3}
+\contentsline {section}{\numberline {2.4}Definire un contorno in un'immagine binaria}{12}{section.2.4}
+\contentsline {section}{\numberline {2.5}Definire un edge in un'immagine digitale}{12}{section.2.5}
+\contentsline {section}{\numberline {2.6}Illustrare il concetto di distanza tra punti in una immagine digitale}{12}{section.2.6}
+\contentsline {section}{\numberline {2.7}Fornire la definizione di istogramma di un'immagine}{12}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Dettagli}{13}{subsection.2.7.1}
+\contentsline {section}{\numberline {2.8}Illustrare le strutture dati tradizionali per rappresentare un'immagine}{13}{section.2.8}
+\contentsline {section}{\numberline {2.9}Illustrare le strutture dati topologiche per rappresentare un'immagine}{14}{section.2.9}
+\contentsline {section}{\numberline {2.10}Illustrare le strutture dati gerarchiche per rappresentare un'immagine}{14}{section.2.10}
+\contentsline {section}{\numberline {2.11}Quali sono le propriet\IeC {\`a} topologiche delle immagini?}{15}{section.2.11}
+\contentsline {section}{\numberline {2.12}Strutture dati di supporto (matrici - grafi di adiacenza - chains - grafi - DB relazionali)}{15}{section.2.12}
+\contentsline {chapter}{\numberline {3}Pre-processing, filtri spaziali, trasformazioni}{16}{chapter.3}
+\contentsline {section}{\numberline {3.1}Cosa si intende per preprocessing di una immagine?}{16}{section.3.1}
+\contentsline {section}{\numberline {3.2}Descrivere i metodi di preprocessing di una immagine}{16}{section.3.2}
+\contentsline {section}{\numberline {3.3}Cosa si intende per filtro spaziale?}{18}{section.3.3}
+\contentsline {section}{\numberline {3.4}Cosa si intende per trasformata di una immagine?}{19}{section.3.4}
+\contentsline {section}{\numberline {3.5}Cosa si intende per equalizzazione di un istogramma? A cosa serve?}{19}{section.3.5}
+\contentsline {section}{\numberline {3.6}Come si pu\IeC {\`o} realizzare uno stretching del contrasto presente in una immagine?}{20}{section.3.6}
+\contentsline {section}{\numberline {3.7}Definire un filtro spaziale lineare}{20}{section.3.7}
+\contentsline {section}{\numberline {3.8}Cosa si intende per operatore lineare?}{20}{section.3.8}
+\contentsline {section}{\numberline {3.9}Correlazione e convoluzione spaziale. Spiegarne le differenze}{21}{section.3.9}
+\contentsline {section}{\numberline {3.10}Descrivere i filtri per lo smoothing nel dominio spaziale}{21}{section.3.10}
+\contentsline {chapter}{\numberline {4}Edge detection}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Illustrare i differenti tipi di edge presenti in un'immagine}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}Classificazione degli edge detector}{23}{section.4.2}
+\contentsline {section}{\numberline {4.3}Illustrare il Marr-Hildreth edge detector}{24}{section.4.3}
+\contentsline {section}{\numberline {4.4}Illustrare il Canny edge detector}{24}{section.4.4}
+\contentsline {section}{\numberline {4.5}Quali sono i vantaggi e gli svantaggi degli edge detector?}{25}{section.4.5}
+\contentsline {chapter}{\numberline {5}Image segmentation}{26}{chapter.5}
+\contentsline {section}{\numberline {5.1}Cosa \IeC {\`e} l'image segmentation?}{26}{section.5.1}
+\contentsline {section}{\numberline {5.2}Quanti tipi di segmentazione abbiamo?}{26}{section.5.2}
+\contentsline {section}{\numberline {5.3}In quali campi viene utilizzata la segmentazione?}{26}{section.5.3}
+\contentsline {section}{\numberline {5.4}Quali sono i metodi utilizzati per la segmentazione?}{27}{section.5.4}
+\contentsline {section}{\numberline {5.5}Cosa si intende con Approccio Globale: Gray level thresholding?}{27}{section.5.5}
+\contentsline {section}{\numberline {5.6}Quale \IeC {\`e} l'idea alla base del gray level thresholding con due elementi (mode) da separare?}{27}{section.5.6}
+\contentsline {section}{\numberline {5.7}Quale \IeC {\`e} l'idea alla base del gray level thresholding con tre elementi (mode) da separare?}{28}{section.5.7}
+\contentsline {section}{\numberline {5.8}Nel gray level thresholding quanti e quali tipi di soglia possiamo avere?}{28}{section.5.8}
+\contentsline {section}{\numberline {5.9}Il thresholding applicato ad immagini con rumore e variazioni di luminosit\IeC {\`a}: cosa cambia?}{28}{section.5.9}
+\contentsline {section}{\numberline {5.10}Cosa \IeC {\`e} il single global threshold e quando si applica?}{29}{section.5.10}
+\contentsline {section}{\numberline {5.11}Quali sono le caratteristiche del single global threshold?}{29}{section.5.11}
+\contentsline {section}{\numberline {5.12}Qual \IeC {\`e} l'algoritmo Matlab per il global thresholding?}{29}{section.5.12}
+\contentsline {section}{\numberline {5.13}Cosa \IeC {\`e} l'Optimum global thresholding o metodo Otsu?}{30}{section.5.13}
+\contentsline {section}{\numberline {5.14}Come funziona il metodo Otsu?}{30}{section.5.14}
+\contentsline {section}{\numberline {5.15}Spiegare le sogliature multiple}{32}{section.5.15}
+\contentsline {section}{\numberline {5.16}Illustra il metodo Otsu in Matlab}{33}{section.5.16}
+\contentsline {section}{\numberline {5.17}Tecniche per migliorare il global thresholding}{33}{section.5.17}
+\contentsline {chapter}{\numberline {6}Segmentazione}{34}{chapter.6}
+\contentsline {section}{\numberline {6.1}Formulazione matematiche di base}{34}{section.6.1}
+\contentsline {section}{\numberline {6.2}Region growing}{34}{section.6.2}
+\contentsline {section}{\numberline {6.3}Qual \IeC {\`e} l'algoritmo di un region growing?}{35}{section.6.3}
+\contentsline {section}{\numberline {6.4}Region Splitting and Merging}{35}{section.6.4}
+\contentsline {subsection}{\numberline {6.4.1}Definizione}{35}{subsection.6.4.1}
+\contentsline {subsection}{\numberline {6.4.2}Region Splitting and Merging: algoritmo}{35}{subsection.6.4.2}
+\contentsline {subsection}{\numberline {6.4.3}Region Splitting and Merging: tecniche di rappresentazione}{36}{subsection.6.4.3}
+\contentsline {subsection}{\numberline {6.4.4}Caratteristiche}{36}{subsection.6.4.4}
+\contentsline {subsection}{\numberline {6.4.5}Algoritmo per lo splitting and merging}{36}{subsection.6.4.5}
+\contentsline {subsection}{\numberline {6.4.6}Region growing Matlab}{36}{subsection.6.4.6}
+\contentsline {subsection}{\numberline {6.4.7}Region growing Matlab: le funzioni}{37}{subsection.6.4.7}
+\contentsline {subsection}{\numberline {6.4.8}Region Splittin and Merging in Matlab: splitmerge}{38}{subsection.6.4.8}
+\contentsline {subsection}{\numberline {6.4.9}Region Splitting and Merging in Matlab: split test}{39}{subsection.6.4.9}
+\contentsline {chapter}{\numberline {7}Morfologia}{40}{chapter.7}
+\contentsline {section}{\numberline {7.1}Introduzione}{40}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}Campi di utilizzo della morfologia matematica}{40}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}Il linguaggio della morfologia matematica}{41}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}Altri concetti della teoria degli insiemi}{41}{subsection.7.1.3}
+\contentsline {subsection}{\numberline {7.1.4}Altri concetti dalla teoria degli insiemi}{42}{subsection.7.1.4}
+\contentsline {subsection}{\numberline {7.1.5}Elemento strutturante}{42}{subsection.7.1.5}
+\contentsline {section}{\numberline {7.2}Operazioni MM}{43}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}Erosione}{43}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}Dilatazione}{43}{subsection.7.2.2}
+\contentsline {subsection}{\numberline {7.2.3}Erosione e dilazione: dualit\IeC {\`a}}{44}{subsection.7.2.3}
+\contentsline {section}{\numberline {7.3}Utilit\IeC {\`a}}{44}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}Opening e Closing: propriet\IeC {\`a}}{45}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}Opening}{45}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.3}Closing}{46}{subsection.7.3.3}
+\contentsline {subsection}{\numberline {7.3.4}Le propriet\IeC {\`a} Opening e Closing}{46}{subsection.7.3.4}
+\contentsline {section}{\numberline {7.4}Trasformazione Hit-or-Miss}{46}{section.7.4}
+\contentsline {section}{\numberline {7.5}Algoritmi di Morfologia basica}{47}{section.7.5}
+\contentsline {subsection}{\numberline {7.5.1}Estrazione di contorni}{47}{subsection.7.5.1}
+\contentsline {subsection}{\numberline {7.5.2}Riempimento di buchi}{47}{subsection.7.5.2}
+\contentsline {section}{\numberline {7.6}Estrazione di componenti connessi}{48}{section.7.6}
+\contentsline {section}{\numberline {7.7}superficie convesso}{48}{section.7.7}
+\contentsline {section}{\numberline {7.8}Thinning (assottigliamento)}{48}{section.7.8}
+\contentsline {section}{\numberline {7.9}Thickening (ingrossamento)}{49}{section.7.9}
+\contentsline {section}{\numberline {7.10}Scheletro}{49}{section.7.10}
+\contentsline {section}{\numberline {7.11}Prunning (riduzione)}{50}{section.7.11}
+\contentsline {subsection}{\numberline {7.11.1}Metodo operativo}{50}{subsection.7.11.1}
+\contentsline {section}{\numberline {7.12}Ricostruzione morfologica}{51}{section.7.12}
+\contentsline {subsection}{\numberline {7.12.1}Dilatazione Geodesic}{51}{subsection.7.12.1}
+\contentsline {subsection}{\numberline {7.12.2}Erosione Geodesic}{52}{subsection.7.12.2}
+\contentsline {subsection}{\numberline {7.12.3}Ricostruzione morfologica attraverso la dilatazione e l'erosione}{52}{subsection.7.12.3}
+\contentsline {section}{\numberline {7.13}Applicazioni}{52}{section.7.13}
+\contentsline {subsection}{\numberline {7.13.1}Opening e closing attraverso la ricostruzione}{52}{subsection.7.13.1}
+\contentsline {subsection}{\numberline {7.13.2}Border cleaning (pulizia dei bordi)}{53}{subsection.7.13.2}
+\contentsline {chapter}{\numberline {8}Morfologia matematica scala di grigi}{54}{chapter.8}
+\contentsline {section}{\numberline {8.1}Erosione e dilatazione tramite un SE flat}{54}{section.8.1}
+\contentsline {section}{\numberline {8.2}Erosione e dilatazione tramite un SE nonflat}{55}{section.8.2}
+\contentsline {section}{\numberline {8.3}Opening e Closing}{55}{section.8.3}
+\contentsline {subsection}{\numberline {8.3.1}Opening e Closing: propriet\IeC {\`a}}{55}{subsection.8.3.1}
+\contentsline {section}{\numberline {8.4}Algoritmi basati sulla scala di grigi morfologica}{56}{section.8.4}
+\contentsline {subsection}{\numberline {8.4.1}Smoothing morfologico}{56}{subsection.8.4.1}
+\contentsline {subsection}{\numberline {8.4.2}Gradiente morfologico}{56}{subsection.8.4.2}
+\contentsline {subsection}{\numberline {8.4.3}Trasformazioni Top-hat e Bottom-hat}{56}{subsection.8.4.3}
+\contentsline {subsection}{\numberline {8.4.4}Granulometria}{57}{subsection.8.4.4}
+\contentsline {subsection}{\numberline {8.4.5}Segmentazione Texturale}{57}{subsection.8.4.5}
+\contentsline {subsection}{\numberline {8.4.6}Ricostruzione morfologica su scala di grigi}{57}{subsection.8.4.6}
+\contentsline {chapter}{\numberline {9}Segmentazione Watershed}{59}{chapter.9}
+\contentsline {section}{\numberline {9.1}Segmentazione attraverso la morfologia}{59}{section.9.1}
+\contentsline {section}{\numberline {9.2}Watershed}{59}{section.9.2}
+\contentsline {section}{\numberline {9.3}L'uso dei marcatori}{61}{section.9.3}
+\contentsline {subsection}{\numberline {9.3.1}Selezione dei marker}{61}{subsection.9.3.1}
+\contentsline {chapter}{\numberline {10}Segmentazione Watershed in Matlab}{63}{chapter.10}
+\contentsline {section}{\numberline {10.1}Segmentazione di una immagine binaria}{63}{section.10.1}
+\contentsline {section}{\numberline {10.2}Segmentazione di una immagine in toni di grigio}{64}{section.10.2}
+\contentsline {section}{\numberline {10.3}Segmentazione usando i marcatori}{64}{section.10.3}
+\contentsline {chapter}{\numberline {11}Image processing con Matlab}{65}{chapter.11}
+\contentsline {section}{\numberline {11.1}Ridimensionamento}{65}{section.11.1}
+\contentsline {section}{\numberline {11.2}Trasformazioni geometriche}{65}{section.11.2}
+\contentsline {section}{\numberline {11.3}Rumore}{66}{section.11.3}
+\contentsline {section}{\numberline {11.4}Smoothing con thresholding}{66}{section.11.4}
+\contentsline {chapter}{\numberline {12}Morfologia Matematica con Matlab}{67}{chapter.12}
+\contentsline {section}{\numberline {12.1}Introduzione}{67}{section.12.1}
+\contentsline {section}{\numberline {12.2}Le funzioni MM}{67}{section.12.2}
+\contentsline {subsection}{\numberline {12.2.1}strel}{67}{subsection.12.2.1}
+\contentsline {subsection}{\numberline {12.2.2}imdilate}{68}{subsection.12.2.2}
+\contentsline {subsection}{\numberline {12.2.3}imerode}{68}{subsection.12.2.3}
+\contentsline {subsection}{\numberline {12.2.4}imopen}{68}{subsection.12.2.4}
+\contentsline {subsection}{\numberline {12.2.5}imclose}{68}{subsection.12.2.5}
+\contentsline {subsection}{\numberline {12.2.6}bwhitmiss}{68}{subsection.12.2.6}
+\contentsline {subsection}{\numberline {12.2.7}imfill}{69}{subsection.12.2.7}
+\contentsline {subsection}{\numberline {12.2.8}bwlabel}{69}{subsection.12.2.8}
+\contentsline {chapter}{\numberline {13}Morfologia matematica binaria}{71}{chapter.13}
+\contentsline {section}{\numberline {13.1}Funzioni}{71}{section.13.1}
+\contentsline {subsection}{\numberline {13.1.1}bwmorph}{71}{subsection.13.1.1}
+\contentsline {subsection}{\numberline {13.1.2}imreconstruct}{71}{subsection.13.1.2}
+\contentsline {subsection}{\numberline {13.1.3}imclearborder}{72}{subsection.13.1.3}
+\contentsline {section}{\numberline {13.2}Esercizi}{72}{section.13.2}
+\contentsline {subsection}{\numberline {13.2.1}Esercizio 1}{72}{subsection.13.2.1}
+\contentsline {subsection}{\numberline {13.2.2}Esercizio 2}{72}{subsection.13.2.2}
+\contentsline {subsection}{\numberline {13.2.3}Esercizio 3}{73}{subsection.13.2.3}
+\contentsline {subsection}{\numberline {13.2.4}Esercizio 4}{73}{subsection.13.2.4}
+\contentsline {subsection}{\numberline {13.2.5}Esercizio 5}{73}{subsection.13.2.5}
+\contentsline {subsection}{\numberline {13.2.6}Esercizio 6}{74}{subsection.13.2.6}
+\contentsline {chapter}{\numberline {14}Segmentazione Watershed in Matlab}{75}{chapter.14}
+\contentsline {section}{\numberline {14.1}Segmentazione di una immagine binaria}{75}{section.14.1}
+\contentsline {section}{\numberline {14.2}Segmentazione di una immagine in toni di grigio}{76}{section.14.2}
+\contentsline {section}{\numberline {14.3}Segmentazione usando i marcatori}{76}{section.14.3}
+\contentsline {chapter}{\numberline {15}Le domande da esame}{77}{chapter.15}
+\contentsline {section}{\numberline {15.1}Immagini digitali}{77}{section.15.1}
+\contentsline {section}{\numberline {15.2}Concetti base sulle immagini digitali}{77}{section.15.2}
+\contentsline {section}{\numberline {15.3}Pre-processing, filtri spaziali, trasformazioni}{78}{section.15.3}
+\contentsline {section}{\numberline {15.4}Edge detection}{78}{section.15.4}
+\contentsline {section}{\numberline {15.5}Segmentazione}{79}{section.15.5}
+\contentsline {section}{\numberline {15.6}Descrizione e rappresentazione}{79}{section.15.6}
+\contentsline {section}{\numberline {15.7}Trasformata di Fourier}{79}{section.15.7}
+\contentsline {section}{\numberline {15.8}Rumore}{80}{section.15.8}
+\contentsline {section}{\numberline {15.9}Morfologia matematica}{80}{section.15.9}
+\contentsline {section}{\numberline {15.10}Image Processing Toolbox and Matlab}{81}{section.15.10}

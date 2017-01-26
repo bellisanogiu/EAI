@@ -1,12 +1,12 @@
 \chapter{Morfologia}
 
 \section{Introduzione}
-La morfologia è una branca della biologia che tratta le forme e la struttura di animali e piante. Nel contesto dell'elaborazione delle immagini, la \textbf{morfologia matematica} è uno strumento che è utile per:
+La morfologia è una branca della biologia che tratta la forma e la struttura di animali e piante. Nel contesto dell'elaborazione delle immagini, la \textbf{morfologia matematica} è uno strumento che è utile anch'esso per:
 
 \begin{itemize}
-	\item estrarre componenti dall'immagine che sia utili per rappresentare e descrivere regiorni come confini, scheletri, e gusci convessi
+	\item estrarre componenti dall'immagine che siano utili per rappresentare e descrivere regioni come confini, scheletri, e superfici convessi
 	
-	\item attuare tecniche di processing come il filtraggio morfologico il thinning e il pruning (potatura)
+	\item attuare tecniche di pre- post-processing come il filtraggio morfologico il thinning (assottigliamento) e il pruning (riduzione)
 \end{itemize}
 
 \subsection{Campi di utilizzo della morfologia matematica}
@@ -30,10 +30,13 @@ La morfologia è una branca della biologia che tratta le forme e la struttura di
 \end{itemize}
 
 \subsection{Il linguaggio della morfologia matematica}
-Il linguaggio alla base della morfologia matematica (denominato MM) è basato sulla \textbf{teoria degli insiemi}.
+Il linguaggio alla base della morfologia matematica (denominato semplicemente MM) è basato sulla \textbf{teoria degli insiemi}, dove gli insiemi rappresentano degli oggetti all'interno delle immagini.
 
-Si campionano le partizioni $xy$ del piano in una griglia, con le coordinate del centro di ogni griglia che diventano un paio di elementi che formano lo spazio degli interni 2D $ZxZ(x^2)$ tale che è l'insieme di tutte le coppie di elementi ordinati $(a, b), a,b \in Z$
+Si campionano le coordinate $xy$ del piano e si rappresentano in una matrice. Nelle immagini binarie gli elementi delle immagini sono membri dell'insime $ZxZ(Z^2)$, dove ogni elemento di un insieme è una tupla (vettore 2D) le cui coordinate sono le coordinate $(x,y)$ di un dato pixel.
 
+Le immagini digitali in scala di grigio sono rappresentate come insiemi le cui componenti si trovano in $Z^3$, dove le prime due coordinate fanno riferimento alle coordinate di un pixel e la terza corrisponde al suo valore discreto di intensità.
+
+Gli spazi dimensionali di dimensioni maggiori possono contenere ulteriori attributi dell'immagine (colore, tempo)
 Gli \textbf{insiemi} nella MM rappresentano le forme degli oggetti in una immagine.
 \begin{itemize}
 	\item l'insieme di tutti i pixel neri in una immagine binaria è una descrizione completa dell'immagine
@@ -95,16 +98,519 @@ Gli \textbf{insiemi} nella MM rappresentano le forme degli oggetti in una immagi
 	\item le operazioni come unione e intersezione possono essere applicate direttamente gli insiemi di immagini binarie
 	
 	\item le operazioni di riflessione e traslazione sono impiegate spesso nella morfologia per formulare operazioni basate sugli \textbf{elementi strutturati} (SEs)
+\end{itemize}
+
+\subsection{Elemento strutturante}
+Gli elementi strutturanti, indicati come SE (Structuring Elements) sono piccoli insiemi o sottoimmagini usate per sondare un'immagine riguardo alle proprietà desiderate.
+\begin{itemize}
+	\item per ogni SE deve essere specificata con precisione anche la sua origine, solitamente indicata con un puntino nero. Quando si ha a che fare con SE simmetrici si assume che tale origine coincida con il centro della simmetria.
+	
+	\item gli SE quando lavorano con le immagini, vengono rappresentate come delle matrici rettangolari e ciò si ottiene aggiungendo il minor numero possibile di elementi di sfondo (mostrati come non ombreggiati) necessari per formare una matrice rettangolare
+	
+	\item nel caso degli insiemi (su cui opera l'SE) anche questo viene convertito in una matrice rettangolo aggiungendo elementi di sfondo. Il bordo dello sfondo deve essere abbastanza grande da contenere l'intero elemento strutturante quando la sua origine si trova sul bordo dell'insieme originale (operazione analoga a quella vista nel padding)
+	
+	\item si crea un nuovo insieme facendo scorrere l'elemento strutturante $B$ sull'insieme $A$ in modo che l'origine di $B$ visiti ogni elemento di $A$
+	
+	\item se una posizione dell'insieme $A$ contiene completamente $B$, allora questa posizione viene marcata come appartenente ad un nuovo insieme (indicato come ombreggiato), altrimenti non viene marcato (indicato come non ombreggiato)
+\end{itemize}
+
+
+\section{Operazioni MM}
+Qui di seguito verranno illustrate alcune delle operazioni di uso più frequente nella morfologia che sono invarianti alla traslazion:
+\begin{itemize}
+	\item erosione (shrinking)
+	\item dilatazione (growing)
+	\item opening (smoothing)
+	\item closing (smoothing)
+	\item trasformazioni Hit-or-Miss
+\end{itemize}
+
+\subsection{Erosione}
+Se $A$ e $B$ sono due insiemi in $Z^2$, l'erosione di $A$ attraverso $B$ in $Z^2$ è indicata come:
+$$
+A \ominus B = \{z | (B)_z \subseteq A\}
+$$
+
+e viene definita come l'insieme di tutti i punti $z$ tali che $B$ traslato di $z$, sia contenuto in $A$.
+
+L'affermazione che $B$ è contenuto in $A$ è equivalente a dire che $B$ non ha elementi in comune con lo sfondo. Per questo motivo l'erosione può anche essere definita come:
+$$
+A \ominus B = \{z | (B)_z \cap A^c = \emptyset \}
+$$
+
+\subsection{Dilatazione}
+Se $A$ e $B$ sono due insiemi in $Z^2$, la dilatazione di $A$ attraverso $B$ in $Z^2$ è indicata come:
+$$
+A \oplus B = \{z | (\hat B)_z \cap A \neq \varnothing \}
+$$
+
+Questa equazione è basata sulla riflessione di $B$ rispetto alla sua origine, e sulla traslazione di questa riflessione attraverso $z$. La dilatazione di $A$ attraverso $B$ è l'insieme di tutti gli spostamenti $z$, tali che $\hat B$ e $A$ si sovrappongono almeno di un elemento.
+
+La definizione può essere scritta in maniera equivalente come:
+$$
+A \oplus B = \{ z | [(\hat B)_z \cap A] \subseteq A \}
+$$
+
+Il processo di base di invertire (ruotare) $B$ rispetto alla sua origine e successivamente spostarlo in modo tale da scorrere sull'insieme (immagine) $A$ è analogo alla convoluzione spaziale vista precedentemente.
+
+La dilatazione si basa su operazioni con insiemi ed inoltre è un'operazione non lineare, mentre la convoluzione è un'operazione lineare
+
+A differenza dell'erosione, che è un'operazione di eliminazione o assottigliamento, la dilatazione "accresce" o "ispessisce" gli oggetti di un'immagine binaria.
+
+Le modalità e le dimensioni di questo ispessimento vengono controllate dalla forma dell'elemento strutturante utilizzato.
+
+\subsection{Erosione e dilazione: dualità}
+L'erosione e la dilatazione sono duali l'una dell'altra rispetto al complementare e alla riflessione di un insieme. Cioè:
+$$
+(A \ominus B)^c = A^c \oplus \hat B ) \quad \text{e} \quad (A \oplus B)^c = A^c \ominus \hat B
+$$
+
+La prima equazione indica che l'erosione di $A$ attraverso $B$ è il complemento della dilatazione di $A^c$ attraverso $\hat{B}$ e viceversa.
+
+La proprietà duale è molto utile quando l'elemento strutturante è simmetrico rispetto alla sua origine (come avviene spesso) così che $\hat{B} = B$. Quindi è possibile ottenere l'erosione di una immagine attraverso $B$ semplicemente dilatando il suo sfondo (cioè dilatando $A^c$) con lo stesso elemento strutturante e complementando il risultato. Considerazioni simili possono essere fatta con la seconda equazione.
+
+Verifichiamo in maniera formale la validità della prima equazione. Dalla definizione di erosione ne segue che:
+$$
+(A \ominus B)^c = \{z | (B)_z \subseteq A \}^c 
+$$
+
+Se l'insieme $(B)_z$ è contenuto in $A$, allora $(B)_z \cap A^c = \varnothing$, caso in cui l'equazione precedente diventa:
+$$
+(A \ominus B)^c = \{z | (B)_z \cap A^c = \varnothing \}^c
+$$
+
+Ma il complemento dell'insieme di valori $z$ che soddisfa $(B)_z \cap A^c = \varnothing$ è l'insieme di valori $z$ tali che $(B)_z \cap A^c \neq \varnothing$. Quindi:
+$$
+(A \ominus B)^c = \{z | (B)_z \cap A^c \neq \varnothing \}
+$$
+
+dove l'ultimo passaggio deriva dall'equazione $A \oplus B = \{z | (\hat B)_z \cap A \neq \varnothing \}$ vista precedentemente nel paragrafo sulla dilatazione.
+
+In maniera analoga si può dimostrare la seconda equazione $(A \oplus B)^c = A^c \ominus \hat B$
+
+\section{Utilità}
+\begin{itemize}
+	\item erosione: rimuove la struttura di certe forme e dimensione in base all'SE scelto
+	
+	\item dilatazione: riempe certe forme e dimensione in base all'SE scelto
+	
+	\item Cosa di cerca
 	\begin{itemize}
-		\item SEs sono piccoli insiemi di sottoimmagini usate per sondare un'immagine e studiarne le proprietà desiderate
-		
-		\item SEs quando lavorano con le immagini, sono degli array rettangolari e ciò si ottiene aggiungendo il minor numero possibile di elementi di sfondo necessari per formare una matrice rettangolare
-		
-		\item si crea un nuovo insieme facendo scorrere $B$ su $A$ in modo che l'origine di $B$ visiti ogni elemento di $A$
-		
-		\item ogni parte dell'origine $B$, se questo è contenuto in $BA$, marca la parte come membro di in un nuovo insieme (indicato come ombreggiato), altrimenti non viene marcato come parte di un nuovo elemento (indicato come non ombreggiato)
-		
-		\item il risultato è che il confine dell'insieme viene \textbf{eroso}
+		\item rimuove le strutture / riempe i buchi
+		\item senza influenzare le parti rimanenti
+	\end{itemize}
+	
+	\item Solution
+	\begin{itemize}
+		\item combina l'erosione e la dilatazione
+		\item utilizza lo stesso SE
 	\end{itemize}
 \end{itemize}
 
+\subsection{Opening e Closing: proprietà}
+Le due operazioni morfologiche definite rispettivamente come apertura e chiusura vengono utilizzate al seguente scopo:
+\begin{itemize}
+	\item opening: serve per rendere più omogenei i contorni di un oggetto, elimina per piccole interruzioni e le protuberanze sottili
+	
+	\item closing: anch'esso rende più omogenee le sezioni del contorno, ma al contrario dell'opening, generalmente fonde insieme le interruzioni sottili e i segmenti stretti e lunghi, elimina i piccoli buchi e riempe vuoti nel contorno
+	
+	\item l'opening e closing sono duali l'uno rispetto all'altro rispetto all'insieme complementare e alla riflessione:
+	$$
+	(A \bullet B)^c = A^C \circ \hat B \quad \text{e}
+	$$
+	
+	$$
+	(A \circ B)^c = A^C \bullet \hat B
+	$$
+\end{itemize}
+
+\subsection{Opening}
+L'opening (apertura) di un insieme $A$ attraverso l'SE $B$, denotato come $A \circ B$ è definito come:
+$$
+A \circ B = (A \ominus B) \oplus B
+$$
+
+Quindi l'opening di $A$ attraverso $B$ si ottiene eseguendo in sequenza l'erosione di $A$ attraverso $B$ e la dilatazione del risultato attraverso $B$
+
+L'interpretazione geometrica si basa sul considerare l'immagine SE $B$ come una palla rotolante (appiattita).
+
+Il \textbf{contorno} di $A \circ B$ viene quindi stabilito dai punti in $B$ che raggiungono il punto più lontano nel bordo di $A$ mentre $B$ gira all'interno di questo confine.
+
+l'opening di $A$ attraverso $B$, da un punto di vista della teoria degli insieme, perciò può essere anche essere ottenuto dall'unione di tutte le traslazioni di $B$ che si adattano in $A$. Cioè, l'apertura può essere espressa come un processo di fitting (adattamento) tale che:
+$$
+A \circ B = \bigcup \{(B)_z | (B)_z \subseteq A \}
+$$
+
+L'opening soddisfa le seguenti proprietà:
+\begin{itemize}
+	\item $A \circ B$ è un sottoinsieme(sottoimmagine) di $A$
+	\item if $C$ è un sottoinsieme di $D$ allora $C \circ B$ è un sottoinsieme di $D \circ B$
+	\item $(A \circ B) \circ B = A \circ B$
+\end{itemize}
+
+\subsection{Closing}
+Il closing  (chiusura) di un insieme $A$ attraverso l'SE $B$, denotato come $A \bullet B$, è definito come:
+$$
+A \bullet B = (A \oplus B) \ominus B
+$$
+
+Quindi il closing di $A$ attraverso $B$ è la dilatazione di $A$ attraverso $B$ seguita dall'erosione del risultato attraverso $B$.
+
+L'interpretazione geometrica del closing è simile a quella dell'opening, eccetto per il fatto che si fa scorrere $B$ sul lato esterno del contorno.
+
+Geometricamente un punto $w$ è un elemento di $a \bullet B$ se e solo se $(B)_z \cap A \neq \varnothing$ per ogni traslazione $((B)_z$ che contiene $w$.
+
+Il closing soddisfa le seguenti proprietà:
+\begin{itemize}
+	\item $A$ è un sottoinsieme (sottoimmagine) di $A \bullet B$
+	\item se $C$ è un sottoinsieme di $D$, allora $C \bullet B$ è un sottoinsieme di $D \bullet B$
+	\item $()A \bullet B \bullet B = A \bullet B$
+\end{itemize}
+
+\subsection{Le proprietà Opening e Closing}
+L'opening e closing sono duali l'uno rispetto all'altro rispetto all'insieme complementare e alla riflessione:
+$$
+(A \bullet B)^c = A^C \circ \hat B \quad \text{e} \quad (A \circ B)^c = A^C \bullet \hat B
+$$
+
+L'opening soddisfa le seguenti proprietà:
+\begin{itemize}
+	\item $A \circ B$ è un sottoinsieme(sottoimmagine) di $A$
+	\item if $C$ è un sottoinsieme di $D$ allora $C \circ B$ è un sottoinsieme di $D \circ B$
+	\item $(A \circ B) \circ B = A \circ B$
+\end{itemize}
+
+Il closing soddisfa le seguenti proprietà:
+\begin{itemize}
+	\item $A$ è un sottoinsieme (sottoimmagine) di $A \bullet B$
+	\item se $C$ è un sottoinsieme di $D$, allora $C \bullet B$ è un sottoinsieme di $D \bullet B$
+	\item $()A \bullet B \bullet B = A \bullet B$
+\end{itemize}
+
+\section{Trasformazione Hit-or-Miss}
+La trasformazione hit-or-miss (colpisci o manca) è una trasformazione morfologica fondamentale per l'individuazione della forma. Spesso è usato per individuare specifiche configurazioni di pixel (i pixel isolati dello sfondo in primo piano o pixel sono punti finali della linea di segmenti).
+
+La trasformazione Hit-or-Miss di $A$ attraverso $B$ è denotata come $A *B$, dove $B$ è un accoppiamento SE $B= (B_1, B_2)$ rispetto che un singolo elemento.
+
+La trasformazione Hit-or-Miss è definita in funzione di questi due SE:
+$$
+A * B = (A \ominus B_1) \cap (A^c \ominus B_2)
+$$
+
+\section{Algoritmi di Morfologia basica}
+\begin{itemize}
+	\item estrazione di contorno
+	\item riempimento di buchi
+	\item estrazione di componenti connessi
+	\item superficie convesso
+	\item thinning (assottigliamento)
+	\item thickening (ispessimento)
+	\item scheletri
+	\item pruning (riduzione)
+	\item ricostruzione morfologica
+\end{itemize}
+
+\subsection{Estrazione di contorni}
+Il bordo di un insieme $A$ indicato come $\beta(A)$, può essere ottenuto inizialmente erodendo $A$ attraverso $B$ e successivamente applicando la differenza insiemistica tra $A$ e la sua erosione:
+$$
+\beta(A) = A - (A \ominus B)
+$$
+
+dove $B$ è un SE adatto (solitamente 3x3, anche se la dimensione può variare portando a bordi di diversi spessori)
+
+\subsection{Riempimento di buchi}
+Un buco è definito come uno sfondo di regione circondato da un bordo connesso di pixel in primo piano.
+
+$A$ denota un insieme di elementi che sono un confine 8-connessi dove ogni confine racchiude un buco.
+
+Fornendo un punto in ogni buco, l'obiettivo è riempire tutti questi buchi con un 1s.
+
+Viene formato un array $X_0$ di $0s$ (la stessa dimensione dell'array che contiene $A$), eccetto nella locazione in $X_0$ corrispondente al punto fornito in ogni buco, che abbiamo impostato a $1$.
+
+La seguente procedura riempe tutti i buchi con 1s:
+\begin{itemize}
+	\item
+	$$
+	X_k = (X_{k-1} \oplus B) \cap A^c \quad k = 1, 2, 3, \dots
+	$$
+	
+	dove $B$ è il SE simmetrico visualizzato nella figura
+	
+	\item l'algoritmo termina al passo $k$ se $X_k = X_{k-1}$
+	
+	\item l'insieme $X_k$ contiene tutti i buchi riempiti
+	
+	\item l'insieme unione di $X_k$ e $A$ contiene tutti i buchi riempiti e i loro confini
+\end{itemize}
+
+\section{Estrazione di componenti connessi}
+L'estrazione di componenti connessi da un'immagine binaria è fondamentale in molte applicazioni basati sull'analisi delle immagini.
+
+Si prenda l'insieme $A$ che contiene uno o più componenti connessi e si formi un array $X_0$ (della stessa dimensione di $A$) i cui elementi sono $0s$ (i valori di sfondo), eccetto alla locazione che corrisponde al punto in ogni componente connessa in $A$, a cui daremo il valore $1$ (valore in primo piano).
+
+L'obiettivo è incominciare con $X_0$ e trovare tutti i componenti connessi.
+
+La procedura interattiva permette di raggiungere l'obiettivo:
+$$
+X_k = (X_{k-1} \oplus B) \cap A \quad k = 1, 2, 3, \dots
+$$
+
+dove $B$ è un opportuno SE
+
+La procedura termina quando $X_k = X_{k-1}$ con $X_k$ contenente tutti i componenti connessi dell'immagine di ingresso.
+
+\section{superficie convesso}
+Un insieme $A$ è detto convesso se la linea retta che unisce due punti qualsiasi di $A$ si trova interamente all'interno di $A$. Il superficie convesso $H$ di un insieme arbitrario $S$ è il più piccolo insieme convesso contenente $S$.
+
+L'insieme differenza $H - S$ è chiamato convex deficiency di $S$. 
+
+Qui di seguito viene presentato un semplice algoritmo morfologico per ottenere un superficie connesso $C(A)$ di un insieme $A$.
+
+Dato $B^i = i = 1, 2, 3, 4$ rappresentando i quattro SE in figura. La procedura consiste nell'implementazione dell'equazione:
+$$
+X_{k}^{i} = (X_{k-1}^{i} * B^i) \cup A \quad i = 1, 2, 3, 4 \quad k = 1, 2, 3 \dots
+$$
+
+con $X_{O}^i = A$
+
+Quando la procedura converge (per esempio quando $X_{k}^i = X_{k-1}^i$) si ha $D^i = X_{k}^i$
+
+Il superficie convesso di $A$ è:
+$$
+C(A) = \bigcup_{i = 1}^{4} D^i
+$$
+
+Il metodo consiste nell'applicare iterativamente la trasformata Hit-or-Miss su $A$ con $B^1$. Quando non ci sono più cambiamenti, si effettua l'unione con $A$ e si chiama il risultato $D^1$
+
+La procedura è ripetuta con $B^2$ (applicata su $A$) sino a quando non ci hanno cambiamenti.
+
+L'unione dei quattro $D$ risultanti costituisce il superficie convesso di $A$
+
+\section{Thinning (assottigliamento)}
+Il thinning di un insieme $A$ attraverso un SE $B$ è denotato come $A \otimes B$ e può essere definito nei termini di una trasformata della trasformata Hit-or-Miss:
+$$
+A \otimes B = A - (A * B) = A \cap (A * B)
+$$
+
+Una espressione più utile per il thinning simmetrico di $A$ è basato sula sequenza di SE:
+$$
+\{B = \{B^1, B^2, B^3, \dots, B^n \} \}
+$$
+
+dove $B^i$ è una versione ruotata di $B^{i-1}$
+
+Si può definire il thinning come una sequenza di SE come:
+$$
+A \otimes \{B \} = ((\dots ((A \otimes B^1) B^2) \dots) \otimes B^n)
+$$
+
+Il processo assottiglia $A$ con una passata di $B^1$ quindi assottiglia il risultato nuovamente con una passata di $B^2$ e così via, sino a quando $A$ è assottigliato con una passata di $B^n$. Questo processo è ripetuto sino a quando non si registrano ulteriori cambiamenti.
+
+\section{Thickening (ingrossamento)}
+Si può definire come il morfologico duale rispetto al thinning ed è definito dall'espressione:
+$$
+A \odot B = A \cup (A * B)
+$$
+
+dove $B$ è un elemento strutturale utilizzato per il thickening.
+
+Il thickening si può definire come un'operazione sequenzale:
+$$
+A \odot \{B\} = ((\dots((A \odot B^1) \odot B^2)\dots)\odot B^n)
+$$
+
+Gli SE utilizzati per il thickening hanno la stessa forma di quelle usate per il thinning, ma con tutti gli 1s e gli 0s scambiati.
+
+Per effettuare l'ingrossamento di un insieme $A$, si può formare $C = A^c$, assottigliare $C$ e quindi formare $C^c$.
+
+L'operazione dipende dalla natura di $A$ e può portare ad avere punti sconnessi. Essa inoltree è seguita da un postprocessing per rimuovere i punti disconnessi.
+
+\section{Scheletro}
+Se $z$ è un punto di $S(A)$ (lo scheletro) e $(D)_z$ è il più grande disco centrato in $z$ e contenuto in $A$, allora non esiste un disco più grande (non necessariamente centrato in $z$) contenente $(D)_z$ (il disco massimo) e incluso in $A$.
+
+Il disco massimo $(D)_z$ tocca il confine di $A$ in due o più posti.
+
+Lo scheletro di $A$ può essere espresso in termini di erosione e opening. Esso può essere visto (Serra 1982) come:
+$$
+S(A) = \bigcup_{k=0}^k S_k (A)
+$$
+
+con
+$$
+S_k(A) = (A \ominus k B) - (A \ominus k B) \circ B
+$$
+
+dove $B$ è un elemento strutturante e $(A \ominus k B)$ indica $k$ successive erosioni di $A$:
+$$
+(A \ominus k B) = ((\dots ((A \ominus B) \ominus B) \ominus \dots) \ominus B)
+$$
+
+$k$ volte e $K$ è l'ultimo passo iterattivo prima che $A$ si eroda in un insieme vuoto. In altre parole;
+$$
+K = max \{k | (A \ominus k B) \neq \varnothing \}
+$$
+
+Questa formulazione afferma che $S(A)$ può essere ottenuto come unione di sottoinsiemi di scheletri $S_k(A)$
+
+Questo può essere visto come $A$ che può essere ricostruito da questi sottoinsiemi usando l'equazione:
+$$
+A = \bigcup_{k = 0}^{K}(S_k(A) \oplus k B)
+$$
+
+dove $(S_k(A) \oplus k B)$ denota le $k$ successive dilazioni di $S_k(A)$:
+$$
+(S_k(A) \oplus k B) = (( \dots ((S_k(A) \oplus B) \oplus B) \oplus \dots ) \oplus B))
+$$
+
+Lo scheletro trovato può essere più spesso del necessario e può non essere connesso.
+
+\section{Prunning (riduzione)}
+Metodi di riduzione sono un complemento essenziale degli algoritmi di thinning e di scheletrizzazione perché queste procedura tendono a lasciare un componenti parassitarie che necessitano di essere ripulite.
+
+\begin{itemize}
+	\item lo scopo nel riconoscimento automatico dei caratteri è quello di analizzare forma dello scheletro di ogni carattere
+	
+	\item gli scheletri sono spesso caratterizzati da spurs, causati dall'erosione
+	
+	\item i componenti parassitari devono essere eliminati senza eccedere uno determinato numero di pixel
+\end{itemize}
+
+\subsection{Metodo operativo}
+La soluzione è basata sulla soppressione del ramo parassitario eliminando via via i suoi punti terminali (nel nostro caso si tratta di rami con 3 pixel o meno)
+
+\begin{itemize}
+	\item si effettua il thinning di un insieme $A$ con una sequenza di SE disegnati per individuare i soli punti finali, sino a trovare il risultato desiderato
+	
+	\item si prende:
+	$$
+	X_1 = A \otimes \{ B \}
+	$$
+	
+	dove $\{B\}$ denota la sequenza in figura, che consiste in due differenti strutture, ognuna delle quali è ruotata di $90^ \circ$
+	
+	\item applicando tre volte la precedente equazione ad $A$ si ottiene l'insieme $X_1$
+	
+	\item il passo successivo è ripristinare i caratteri alla loro forma originale con i rami parassitari rimossi. Per fare questo, inizialmente si forma un insieme $X_2$ contenente tutti i punti finali in $X_1$:
+	$$
+	X_2 = \bigcup_{k = 1}^{8} (X_1 * B^k)
+	$$
+	
+	dove $B^k$ sono gli stessi rilevatori di punti finali 
+	
+	\item successivamente si effettua per tre volte la dilatazione dei punti final, usando un insieme $A$ come delimitatore:
+	$$
+	X_3 = (X_2 \oplus H) \cap A
+	$$
+	
+	dove $H$ è $3x3$ SE di 1s e l'intersezione con $A$ è applicata dopo ogni passo
+	
+	\item l'unione di $X_1$ e $X_3$ permette di ottenere il risultato desiderato $X_4 = X_1 \cup X_3$
+\end{itemize}
+
+\section{Ricostruzione morfologica}
+La ricostruzione morfologica coinvolge due immagini e un elemento strutturante.
+\begin{itemize}
+	\item un'immagine viene definita \textbf{marker} (marcatore) e contiene i punti iniziali della trasformazione
+	
+	\item l'altra immagine è la \textbf{mask} (maschera) che vincola la trasformazione
+	
+	\item l'elemento strutturante è usato per definire la connettività
+\end{itemize}
+
+\subsection{Dilatazione Geodesic}
+La dilatazione geodesic di dimensione 1 di una immagine marcatore rispetto alla maschera, indicata da $D_G^{(1)} (F)$ è definita come:
+$$
+D_G^{(1)} (F) = (F \oplus B) \cap G
+$$
+
+dove:
+\begin{itemize}
+	\item $F$ indica l'immagine marker
+	\item $G$ è l'immagine mask
+	\item immagine binaria e $F \subseteq G$
+\end{itemize}
+
+La dilatazione geodesic di dimensione $n$ di $F$ rispetto a $G$ è definita come:
+$$
+D_G^{(n)} (F) = D_G^{(1)}[D_G^{(n-1)} (F)]
+$$
+
+dove $D_G^{(0)} (F) = F$
+
+L'intersezione, effettuata ad ogni passaggio, garantisce che la maschera $G$ limiterà la crescita (dilatazione) del marker $F$.
+
+\subsection{Erosione Geodesic}
+L'erosione geodesic di dimensione 1 di una immagine marcatore $F$ rispetto alla maschera $G$, denotata da $E_G^(1) (F)$, è definita come:
+$$
+E_G^(1) (F) = (F \ominus B) \cup G
+$$
+
+L'erosione geodesic di dimensione $n$ di $F$ rispetto a $G$ è definita come:
+$$
+E_G^{(n)} (F) = E_G^{(1)}[E_G^{n-1} (F)]
+$$
+
+dove $E_G^{(0)} (F) = (F)$
+
+L'unione, effettuata ad ogni passo, garantisce che l'erosione geodesic di una immagine rimanga uguale o superiore a quella della maschera dell'immagine.
+
+L'erosione  e la dilatazione geodesic sono duali rispetto al complemento dell'insieme
+
+\subsection{Ricostruzione morfologica attraverso la dilatazione e l'erosione}
+
+\begin{itemize}
+	\item \textbf{ricostruzione morfologica attraverso la dilatazione} di una maschera di immagine $G$ da una immagine marker $F$, indicata con $R_G^{(D)} (F)$, è definita come una dilatazione geodesic di $F$ rispetto a $G$, iterato sino a quando si ottiene la stabilità:
+	$$
+	R_G^{(D)} (F) = D_G^{(k)}(F)
+	$$
+	
+	con $k$ tale che $D_G^k (F) = D_G^{k+1} (F)$
+	
+	\item \textbf{ricostruzione morfologica attraverso l'erosione} di una maschera di immagine $G$ da una immagine marker $F$, indicata con$R_G^{(E)} (F)$, è definita come l'erosione geodesic di $F$ rispetto a $G$, iterata sino a quando si ottiene la stabilità:
+	$$
+	R_G^(E) (F) = E_G^{(k)} (F)
+	$$
+	
+	con $k$ tale che $E_G^{(k) (F)} E_G^{k+1} (F)$
+\end{itemize}
+
+\section{Applicazioni}
+
+\subsection{Opening e closing attraverso la ricostruzione}
+L'opening attraverso la ricostruzione ripristina esattamente le forme degli oggetti che rimangono dopo l'erosione.
+
+L'opening attraverso la ricostruzione di dimensione $n$ di una immagine $F$ è definita come la ricostruzione attraverso la dilatazione di $F$ a partire dall'erosione di dimensione $n$ di $F$:
+$$
+O_R^{(n)} (F) = R_F^D[(F \ominus n B)]
+$$
+
+dove $(F \ominus n B)$ indica le $n$ erosioni di $F$ attraverso $B$
+$F$ è usata come maschera
+
+Una espressione simile è scritta per il closing attraverso la ricostruzione
+
+\subsection{Border cleaning (pulizia dei bordi)}
+Si tratta di una procedura basata su una ricostruzione morfologica.
+E' un algoritmo che rimuove gli oggetti che toccano il bordo, che risulta in diversi casi:
+
+\begin{itemize}
+	\item per effettuare lo screen di immagini in cui completare gli oggetti rimanenti per successive elaborazioni
+	
+	\item come segnale di oggetti parziali presente nel campo di vista
+\end{itemize}
+
+L'immagine originale $I$ è usato come maschera, mentre l'immagine marcatore è la seguente:
+$$
+F(x, y) =
+\begin{cases}
+I(x, y) \text{ se } (x, y) \text{ è sul bordo di } I \\
+0 \text{ negli altri casi }
+\end{cases}
+$$
+
+L'algoritmo prima calcola la ricostruzione morfologica $R_i^{(D) (F)}$ (semplicemente estraendo gli oggetti che toccano il bordo) e successivamente calcola la differenza:
+$$
+X = I - R_I^{(D)} (F)
+$$
+
+Questo permette di ottenere un'immagine $X$ senza oggetti che toccano il bordo.

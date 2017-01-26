@@ -1,0 +1,212 @@
+\chapter{Morfologia matematica scala di grigi}
+Nella morfologia scala di grigi si utilizzano funzioni discrete definite in $Z^2$ nella forma:
+\begin{itemize}
+	\item $f(x, y)$ che indica una immagine in scala di grigi
+	
+	\item $b(x, y)$ che indica un SE, utilizzata come sonda per esaminare un'immagine e le sue specifiche proprietà
+	\begin{itemize}
+		\item gli SE nella morfologia scala di grigi può essere $flat$ oppure $nonflat$
+		\item l'origine deve essere definita e solitamente risulta essere simmetrica con l'origine situata al centro
+		
+		\item la riflessione di SE è indicata come:
+		$$
+		\hat{b} (x, y) = b (-x, -y)
+		$$
+	\end{itemize}
+\end{itemize}
+
+\section{Erosione e dilatazione tramite un SE flat}
+\begin{itemize}
+	\item L'\textbf{erosione} di $f$ tramite un SE flat $b$ in ogni punto $(x, y)$ è definito come il \textbf{minimo} valore di uan immagine in una regione coincidente con $b$ quando l'origine di $b$ si trova in $(x, y)$:
+	$$
+	[f \ominus b] (x, y) = \displaystyle\min_{(s, t) \in b} \{f(x + s, y + t)\}
+	$$
+	
+	\item la \textbf{dilazione} di $f$ tramite un SE flat $b$ in ogni punto $(x, y)$ è definito come il \textbf{massimo} valore di una immagine nella finestra delineata da $\hat{b}$ quando l'origine di $\hat{b}$ si trova in $(x, y)$:
+	$$
+	[f \oplus b] (x, y) = \displaystyle\max_{(s, t) \in b} \{f(x - s, y - t)\}
+	$$
+\end{itemize}
+
+\section{Erosione e dilatazione tramite un SE nonflat}
+\begin{itemize}
+	\item l'\textbf{erosione} di $f$ tramite un SE nonflat $b_N$ è definito come:
+	$$
+	[f \ominus b_N] (x, y) = \displaystyle\min_{(s, t) \in b_N} \{f(x + s, y + t) - b_N(s, t)\}
+	$$
+	
+	\item la \textbf{dilatazione} di $f$ tramite un SE nonflat $b_N$ è definito come:
+	$$
+	[f \oplus b_N] (x, y) = \displaystyle\max_{(s, t) \in b_N} \{f(x - s, y - t) + b_N(s, t)\}
+	$$
+	
+	\item quando tutti gli elementi di $b_N$ sono costanti (per esempio l'SE è flat) la definizione si riduce alla precedente all'interno di una costante scalare uguale all'ampiezza di SE
+	
+	\item gli SE scala di grigi sono raramente utilizzati
+	
+	\item l'erosione e la dilatazione sono duali rispetto alla funzione di complemento e riflessione
+\end{itemize}
+
+\section{Opening e Closing}
+\begin{itemize}
+	\item l'opening è usato per rimuovere piccoli dettagli luminosi, mentre i dettagli più grandi vengono trascurati.
+	
+	\item l'opening di una immagine $f$ attraverso un SE $b$ è denotato come $f \circ b$:
+	$$
+	f \circ b = (f \ominus b) \oplus b
+	$$
+\end{itemize}
+
+\begin{itemize}
+	\item il closing è utilizzato per attenuare le caratteristiche scure con una attenuazione graduale che dipende dalle dimensioni delle caratteristiche rispetto a SE:
+	
+	\item il closing di una immagine $f$ tramite un SE $b$ è indicato come $f \bullet b = (f \oplus b) \ominus b$
+\end{itemize}
+
+L'opening e il closing sono duali rispetto al complemento e alla SE riflessione:
+$$
+(f \circ b)^c = f^c \bullet \hat{b} \quad \text{e} \quad (f \bullet b)^c = f^c \circ \hat{b}
+$$
+
+\subsection{Opening e Closing: proprietà}
+\begin{itemize}
+	\item l'opening scala di grigi soddisfa le seguenti proprietà:
+	\begin{itemize}
+		\item $f \circ b \rotatebox[origin=c]{180}{$\Rsh$} f$
+		
+		\item se $f_1 \rotatebox[origin=c]{180}{$\Rsh$}	f_2 \quad \text{allora} \quad (f_1 \circ b) \rotatebox[origin=c]{180}{$\Rsh$}(f_2 \circ b)$
+		
+		\item $(f \circ b) \circ b = f \circ b$ 
+	\end{itemize}
+	
+	\item il closing scala di grigi soddisfa le seguenti proprietà:
+	\begin{itemize}
+		\item $f \rotatebox[origin=c]{180}{$\Rsh$} f \bullet b$
+		
+		\item se $f_1 \rotatebox[origin=c]{180}{$\Rsh$}	f_2 \quad \text{allora} \quad (f_1 \bullet b) \rotatebox[origin=c]{180}{$\Rsh$}	 (f_2 \bullet b)$
+		
+		\item $(f \bullet b) \bullet b = f \bullet b$
+	\end{itemize}
+\end{itemize}
+NOTA: la notazione $e \rotatebox[origin=c]{180}{$\Rsh$}	 r$ è usata per indicare che il dominio di $e$ è un sottoinsieme del dominio di $r$ e che $e(x, y) \leq r(x,y)$ per ogni $(x, y)$ ne dominio di $e$
+
+\section{Algoritmi basati sulla scala di grigi morfologica}
+
+\subsection{Smoothing morfologico}
+L'opening elimina piccoli dettagli luminosi, piccoli rispetto ad uno specifico SE. Il closing invece elimina i dettagli scuri. Essi sono usati in combinazione come filtri morfologici per lo smoothing dell'immagine e per rimuovere il rispettivo rumore.
+
+In maniera alternativa, è possibile ottenere una sequenza di filtering nel seguente modo:
+La sequenza di opening-closing incomincia con l'immagine originale, ma i singoli passi dell'opening e del closing vengono effettuati sul risultato del passo precedente.
+
+\subsection{Gradiente morfologico}
+La dilatazione e l'erosione possono essere usate in combinazione con la "sottrazione dell'immagine" per ottenere il gradiente morfologico $g$ di una immagine:
+$$
+g = (f \oplus b) - (f \ominus b)
+$$
+
+La dilatazione addensa le regioni in una immagine e l'erosione le restringe.
+
+La loro differenza enfatizza i confini tra le regioni.
+
+\subsection{Trasformazioni Top-hat e Bottom-hat}
+\begin{itemize}
+	\item la trasformazione top-hat di una immagine in toni di grigio $f$ è definita come "f minus its opening":
+	$$
+	T_hat(f) = f - (f \circ b)
+	$$
+	
+	\item la trasformazione bottom-hat di una immagine in toni di grigio $f$ è definita come il closing di $f$ minus $f$:
+	$$
+	B_hat(f) = (f \bullet b) - f
+	$$
+\end{itemize}
+
+Queste trasformazioni sono usate per rimuovere gli oggetti dall'immagine usando un SE nelle operazioni di opening o closing che non si adatta alle immagini da rimuovere.
+
+L'operazione differenza produce un'immagine in cui rimangono solo i componenti rimossi:
+\begin{itemize}
+	\item la trasformazione top-hat è usata per gli oggetti luminosi su uno sfondo scuro
+	\item la trasformazione bottom-hat è usata per il contrario.
+\end{itemize}
+
+\subsection{Granulometria}
+E' un campo che si occupa di determinare la dimensione della distribuzione delle particelle in una immagine.
+
+La morfologia può essere usata per stimare la dimensione della distribuzione di particelle nella distribuzione senza identificare e misurare ogni particella nell'immagine.
+
+Con particelle aventi forma regolare e che sono più luminose rispetto allo sfondo, il metodo consiste nell'applicare l'opening con SE di dimensioni maggiori.
+
+Le operazioni di opening con una certa dimensione hanno un effetto maggiore nelle regioni dell'immagine di input che contiene particelle di dimensioni simili.
+
+Per ogni openint, la somma dei valori dei pixel nell'opening viene calcolato. Questa somma è chiamata \textbf{surface area (superficie)} e diminuisce in funzione all'incremento della dimensione di SE.
+
+Questa procedura produce una matrice 1-D di tali numeri, con ogni elemento nella matrice che diventa uguale alla somma dei pixel nell'opening per la dimensione SE corrispondente a quella posizione nella matrice.
+
+Per enfatizzare i cambiamenti tra successivi opening, si calcola la defferenza tra gli elementi adiacenti della matrice 1-D.
+
+Le visualizzare i risultati, la differenza viene tracciata (plotted). I picchi nel grafico indicano la dimensione predominante della distribuzione di particelle nell'immagine.
+
+\subsection{Segmentazione Texturale}
+L'immagine rumorosa qui rappresentata ha due regioni strutturali:
+\begin{itemize}
+	\item una regione composta da chiazza larghe sulla destra
+	\item una regione composta da chiazze piccole sulla sinistra
+\end{itemize}
+
+\subsection{Ricostruzione morfologica su scala di grigi}
+Sia $f$ il marker e $g$ la maschera dell'immagine. Entrambi sono immagini in tono di grigio della stessa dimensione e $f \leq g$
+
+La \textbf{dilatazione geodetica di dimensione 1} di $f$ rispetto a $g$ è definita come:
+$$
+D_{g}^{(n)}(f) = D_{g}^{(1)}[D_{g}^{(n-1)}(f)]
+$$
+
+dove:
+$$
+D_{g}^{(0)}(f) = f
+$$
+
+L'\textbf{erosione geodetica di dimensione 1} di $f$ rispetto a $g$ è definita come:
+$$
+E_g^{(1)}(f) = (f \ominus b) \vee g
+$$
+
+dove $\vee$ indica " the point-wise maximum operator"
+
+L'\textbf{erosione geodetica di dimensione n} di $f$ rispetto a $g$ è definita come:
+$$
+E_g^{(n)}(f) = E_g^{(1)}[E_g^{(n-1)}(f)]
+$$
+
+dove:
+$$
+E_g^{(0)}(f) = f
+$$
+
+La ricostruzione morfologica su scala di grigi tramite la dilatazione di maschera $g$ di una immagine $f$ è definita come la dilatazione geodetica di $f$ rispetto a $g$, iterata sino a che viene raggiunta la stabilità:
+$$
+R_g^{(D)}(f) = R_g^{(k)}(f)
+$$
+
+con $k$ tale che $D_g^{(k)}(f) = D_g^{(k+1)}(f)$
+
+La ricostruzione morfologica su scala di grigi tramite l'erosione di maschera $g$ di una immagine $f$ è definita come l'erosione geodetica di $f$ rispetto a $g$, iterata sino a che viene raggiunta la stabilità:
+$$
+R_g^{(E)}(f) = E_g^{(k)}(f)
+$$
+
+con $k$ tale che $E_g^{(k)}(f) = E_g^{(k+1)}(f)$
+
+L'opening tramite ricostruzione di dimensione $n$ di una immagine $f$ è definita come la ricostruzione tramite dilatazione di $f$ partendo dall'erosione di dimensione $n$ di $f$:
+$$
+O_R^{n}(f) = R_f^{(D)}[()f \ominus nb)]
+$$
+
+dove $(f \ominus nb)$ denota $n$ erosioni di $f$ tramite $b$.
+
+Il closing tramite ricostruzione di dimensione $n$ di una immagine $f$ è definita come la ricostruzione tramite erosione di $f$ partente dalla dilatazione di dimensione $n$ di $f$:
+$$
+C_R^{(n)}(f) = R_f^{(E)}[(f \oplus nb)]
+$$
+
+dove $f \oplus nb)$ denota $n$ dilatazioni di $f$ tramite $b$.

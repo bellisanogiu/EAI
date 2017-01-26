@@ -1,0 +1,136 @@
+\chapter{Morfologia matematica binaria}
+
+\section{Funzioni}
+
+\subsection{bwmorph}
+Questa funzione implementa diverse operazioni basate sulla combinazione di erosione e dilatazione. La sintassi è:
+\begin{lstlisting}
+g = bwmorph(f, operation, n)
+\end{lstlisting}
+
+\begin{itemize}
+	\item $f$ è un'immagina binaria di input
+	\item $operation$ è una stringa che specifica le operazioni desiderate
+	\item $n$ (opzionale) è un numero intero positivo che indica il numero di volte che l'operazione deve essere ripetuta. Se $n$ viene omesso, l'operazione viene eseguita una sola volta
+\end{itemize}
+
+\subsection{imreconstruct}
+Implementa la ricostruzione morfologica ed è esplicitata dalla sintassi:
+\begin{lstlisting}
+out = imreconstruct(marker, mask)
+\end{lstlisting}
+
+\begin{itemize}
+	\item $marker$ è l'immagine marcatore
+	\item $mask$ è l'immagine maschera
+\end{itemize}
+
+\subsection{imclearborder}
+Permette la pulizia dei bordi degli oggetti, con la sintassi:
+\begin{lstlisting}
+g = imclearborder(f, conn)
+\end{lstlisting}
+
+\begin{itemize}
+	\item $f$ è l'immagine di input
+	\item $g$ è il risultato
+	\item $conn$ può assumere i valori di 4 oppure 8 (valore di default)
+\end{itemize}
+
+\section{Esercizi}
+
+\subsection{Esercizio 1}
+Calcola e visualizza il centro di massa di ogni componente connesso.
+\begin{lstlisting}
+f= imread('ten-objects.tif');
+imshow(f);
+[L, n]=bwlabel(f);
+n
+hold on; % to plot on the top of the image
+
+for k=1:n
+	[r,c] = find(L==k);
+	rbar=mean(r);
+	cbar=mean(c);
+	plot(cbar, rbar, 'Marker', 'o', 'MarkerEdgeColor', 'k', 'MarkerFaceColor', 'k', 'Markersize', 10);
+	plot(cbar, rbar, 'Marker', '*', 'MarkerEdgeColor', 'w');
+end
+\end{lstlisting}
+
+\subsection{Esercizio 2}
+Effettua il thinning dell'immagine $finger-print.tif$ sino ad ottenere la stabilità.
+\begin{lstlisting}
+f=imread('noisy-fingerprint.tif');
+imshow(f);
+se = strel('square',3);
+fo = imopen(f,se);
+figure, imshow(fo);
+foc = imclose(fo,se);
+figure, imshow(foc);
+
+g1 =bwmorph(foc,'thin',1);
+figure, imshow(g1);
+g2 =bwmorph(foc,'thin',2);
+figure, imshow(g2);
+ginf =bwmorph(foc,'thin',Inf);
+figure, imshow(ginf);
+\end{lstlisting}
+
+\subsection{Esercizio 3}
+Effettuare la sclettrizzazione dell'immagine $bone$ e si rimuovano i punti finali (5 pixel).
+\begin{lstlisting}
+f=imread('bone.tif');
+imshow(f)
+fs = bwmorph(f,'skel',Inf);
+figure, imshow(fs);
+for k=1:5
+	fs=bwmorph(fs,'spur');
+end
+figure, imshow(fs);
+\end{lstlisting}
+
+\subsection{Esercizio 4}
+Ricostruzione morfologica
+\begin{lstlisting}
+marker =imread('recon-marker.tif');
+mask = imread('recon-mask.tif');
+figure, imshow(mask);
+figure, imshow(marker);
+recon = imreconstruct(marker, mask);
+??? MARKER pixels must be <= MASK
+pixels.
+
+Error in ==> imreconstruct at 71
+im = imreconstructmex(marker,mask);
+
+mm=marker==255;
+mm= uint8(mm*255);
+recon = imreconstruct(mm, mask);
+figure, imshow(recon);
+\end{lstlisting}
+
+
+\subsection{Esercizio 5}
+Effettuare la ricostruzione morfologica per trovare quali caratteri contengono un'asticella verticale.
+\begin{lstlisting}
+f=imread('book-text.tif');
+figure, imshow(f);
+
+fe=imerode(f,ones(51,1));
+figure, imshow(fe);
+
+fo=imopen(f, ones(51,1));
+figure, imshow(fo);
+
+fobr=imreconstruct(fe,f);
+figure, imshow(fobr);
+\end{lstlisting}
+
+
+\subsection{Esercizio 6}
+Effettuare una pulizia dei caratteri che toccano lo schermo.
+\begin{lstlisting}
+g = imclearborder(f);
+figure, imshow(g);
+figure, imshow(f - g);
+\end{lstlisting}

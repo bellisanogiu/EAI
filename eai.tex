@@ -8,10 +8,15 @@
 \usepackage{microtype}				% Microgiustificazione
 \usepackage{makeidx}				% indice analitico
 \usepackage{hyperref}				% Gestione riferimenti incrociati
+\usepackage{amssymb}				% Simboli matematici
+\usepackage{wasysym}
+\usepackage{mathcomp}
+\usepackage{amsmath}
+\usepackage{pifont}
 
 \title{Elaborazione e Analisi delle Immagini}
 \author{Giuseppe Bellisano}
-\date{30 novembre 2016}
+\date{}
 
 \makeindex
 
@@ -38,8 +43,11 @@
 	name=$\omega_\mathrm{n}$,
 	description={pulsazione naturale},
 }
-
-
+% --------------------------------------------------------------------
+\newglossaryentry{Region growing}{%
+	name=regionGrowing,
+	description={Region growing (traducibile in italiano come "accrescimento delle regioni") è un semplice metodo di segmentazione di immagini basato su regioni. Viene anche considerato come un metodo basato sul singolo pixel poiché tale metodo comporta inizialmente la selezione dei punti seme. Questo approccio alla segmentazione esamina i pixel adiacenti di punti iniziali, detti semi, e determina se i vicini di pixel possono essere aggiunti a tale regione. Il processo viene iterato, allo stesso modo come negli algoritmi di clustering di dati.},
+}
 
 \usepackage{listings}
 \usepackage{color}
@@ -79,13 +87,24 @@
 \maketitle
 \tableofcontents 					%indice generale
 
+\input{capitoli/immagini}
+\input{capitoli/preprocessingFiltriTrasformazioni}
+\input{capitoli/edgeDetection}
 \input{capitoli/segmentazione}
 \input{capitoli/segmentazione2}
-\input{matlab/imageprocessing}
 \input{capitoli/morfologia}
+\input{capitoli/morfologiaScalaGrigi}
+\input{capitoli/segmentazioneWatershed}
+\input{matlab/matlab_segmentazioneWatershed}
+
+\input{matlab/matlab_imageprocessing}
+\input{matlab/matlab_morfologia}
+\input{matlab/matlab_morfologiaBinaria}
+\input{matlab/matlab_segmentazioneWatershed}
+
+\input{capitoli/domande}
+
 \printindex				% stampa indice analitico
 
 \printglossaries		% stampa glossario
 \end{document}
-
-
